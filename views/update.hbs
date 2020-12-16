@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Update User</h1>
-    <form action="/update/id" method="POST">
+    <form action="/update/{{id}}" method="POST">
         <label for="first_name" >first name</label>
         <input type="text" name="first_name" placeholder={{first_name}}><br>
         <label for="surname">surname</label>
@@ -20,6 +20,6 @@
         <button type="submit">Update User</button>
     </form>
 
-    <p>User X  has been updated</p>
+    <p>User {{updatedName}} {{updatedSurname}} has been updated</p>
 </body>
 </html>

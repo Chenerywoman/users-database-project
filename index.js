@@ -48,6 +48,7 @@ app.get("/update/:id", (req, res) => {
 
     const sqlQuery = 'SELECT * FROM users WHERE id = ?';
     const id = req.params.id
+    console.log(`req.params.id in get ${req.params.id}`)
     const user = [id];
 
     db.query(sqlQuery, user, (error, results) => {
@@ -62,7 +63,7 @@ app.get("/update/:id", (req, res) => {
                 surname: userDetails.surname,
                 email: userDetails.email,
                 password: userDetails.password,
-                id: userDetails.id
+                id: id
             })
         }
     });
@@ -70,8 +71,28 @@ app.get("/update/:id", (req, res) => {
 });
 
 app.post("/update/:id", (req, res) => {
+    console.log(`req.params.id in update post ${req.params.id}`)
 
-    console.log(req.body)
+    const id = req.params.id;
+    const first_name = req.body.first_name;
+    const surname = req.body.surname;
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const sqlQuery = 'UPDATE users SET first_name = ?, surname  = ?, email = ?, password = ? WHERE id = ?';
+
+    const user = [first_name, surname, email, password, id]
+
+    db.query(sqlQuery, user, (error, results) => {
+        if (error) {
+            res.send("unable to update user")
+        } else {
+            res.render("update", {
+                updatedName: first_name,
+                updatedSurname: surname
+            });
+        }
+    })
 });
 
 app.get("*", (req, res) => {
