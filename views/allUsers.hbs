@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/allUsers.css">
     <title>All Users</title>
 </head>
 <body>
-    {{!-- <h1>All users</h1>
+    <h1>All users</h1>
     {{#each users}}
     <p>
         name: {{this.first_name}} {{this.surname}}
@@ -16,11 +17,12 @@
             <button type="submit">Update User</button>
        </form>
 
-        <form action="/delete/{{this.id}}" method="GET">
+        <form action="/delete/{{this.id}}" method="POST">
+            <input class="user-to-delete" type="text" name="userName" value="{{this.first_name}} {{this.surname}}">
             <button type="submit">Delete User</button>
         </form>
 
     </p>
-    {{/each}} --}}
+    {{/each}}
 </body>
 </html>

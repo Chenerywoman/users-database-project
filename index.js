@@ -35,10 +35,13 @@ hbs.registerPartials(partialPath);
 
 app.get("/", (req, res) => {
 
+});
+
+app.get("/allUsers", (req, res) => {
     const sqlQuery = 'SELECT * FROM users';
 
     db.query(sqlQuery,(error, results) =>{
-        res.render("index", {
+        res.render("allUsers", {
             users:results
         });
     });
@@ -48,7 +51,6 @@ app.get("/update/:id", (req, res) => {
 
     const sqlQuery = 'SELECT * FROM users WHERE id = ?';
     const id = req.params.id
-    console.log(`req.params.id in get ${req.params.id}`)
     const user = [id];
 
     db.query(sqlQuery, user, (error, results) => {
@@ -71,7 +73,6 @@ app.get("/update/:id", (req, res) => {
 });
 
 app.post("/update/:id", (req, res) => {
-    console.log(`req.params.id in update post ${req.params.id}`)
 
     const id = req.params.id;
     const first_name = req.body.first_name;
@@ -93,6 +94,29 @@ app.post("/update/:id", (req, res) => {
             });
         }
     })
+});
+
+app.post("/delete/:id", (req, res) => {
+  console.log(`id in delete ${req.params.id}`)
+   console.log(`in delete ${req.body.userName}`)
+
+    const id = req.params.id;
+    const userName = req.body.userName;
+    const sqlDeleteQuery = 'DELETE FROM users WHERE id = ?';
+    const user = [id];
+
+    db.query(sqlDeleteQuery, user, (error, results) => {
+        if (error) {
+            console.log(error)
+            res.send(`unable to delete user ${id}`)
+        } else {
+            console.log(results);
+            res.render("delete", {
+                deletedUserId: id,
+                userName: userName
+            });
+        }
+    });
 });
 
 app.get("*", (req, res) => {
