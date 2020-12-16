@@ -6,6 +6,21 @@
     <title>All Users</title>
 </head>
 <body>
-    
+    <h1>All users</h1>
+    {{#each users}}
+    <p>
+        name: {{this.first_name}} {{this.surname}}
+        email: {{this.email}}
+
+       <form action="/update/{{this.id}}" method="GET">
+            <button type="submit">Update User</button>
+       </form>
+
+        <form action="/delete">
+            <button type="submit">Delete User</button>
+        </form>
+
+    </p>
+    {{/each}}
 </body>
 </html>

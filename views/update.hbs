@@ -6,6 +6,20 @@
     <title>Update User</title>
 </head>
 <body>
-    
+    <h1>Update User</h1>
+    <form action="/update/id" method="POST">
+        <label for="first_name" >first name</label>
+        <input type="text" name="first_name" placeholder={{first_name}}><br>
+        <label for="surname">surname</label>
+        <input type="text" name="surname" placeholder={{surname}}><br>
+        <label for="email">email</label>
+        <input type="text" name="email" placeholder={{email}}><br>
+        <label type="text" name="password">password</label>
+        <input type="text" name="password" placeholder={{password}}>
+        <br>
+        <button type="submit">Update User</button>
+    </form>
+
+    <p>User X  has been updated</p>
 </body>
 </html>

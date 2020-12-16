@@ -33,6 +33,46 @@ app.set("views", viewsPath);
 
 hbs.registerPartials(partialPath);
 
+app.get("/", (req, res) => {
+
+    const sqlQuery = 'SELECT * FROM users';
+
+    db.query(sqlQuery,(error, results) =>{
+        res.render("index", {
+            users:results
+        });
+    });
+});
+
+app.get("/update/:id", (req, res) => {
+
+    const sqlQuery = 'SELECT * FROM users WHERE id = ?';
+    const id = req.params.id
+    const user = [id];
+
+    db.query(sqlQuery, user, (error, results) => {
+        if (error) {
+            res.send(`User number ${id} not found` )
+        } else {
+
+            let userDetails = results[0];
+
+            res.render("update", {
+                first_name: userDetails.first_name,
+                surname: userDetails.surname,
+                email: userDetails.email,
+                password: userDetails.password,
+                id: userDetails.id
+            })
+        }
+    });
+
+});
+
+app.post("/update/:id", (req, res) => {
+
+    console.log(req.body)
+});
 
 app.get("*", (req, res) => {
     res.render("page-not-found", {
