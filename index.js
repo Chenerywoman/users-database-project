@@ -34,7 +34,7 @@ app.set("views", viewsPath);
 hbs.registerPartials(partialPath);
 
 app.get("/", (req, res) => {
-
+    res.render("index.hbs")
 });
 
 app.get("/allUsers", (req, res) => {
@@ -45,6 +45,61 @@ app.get("/allUsers", (req, res) => {
             users:results
         });
     });
+});
+
+app.get("/register", (req, res) => {
+
+    res.render("register")
+});
+
+app.post("/register", (req, res) => {
+
+    console.log(`first name in register ${req.body.first_name}`)
+
+    const first_name = req.body.first_name;
+    const surname = req.body.surname;
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const sqlQueryEmailCheck = "SELECT * FROM users WHERE email = ?";
+    const sqlQueryInsert = "INSERT INTO users (first_name, surname, email, password) VALUES (?, ?, ?, ?)";
+    
+    const emailParam = [email]
+    const user = [first_name, surname, email, password];
+
+    db.query(sqlQueryEmailCheck, emailParam, (error, result) => {
+        if (error) {
+            console.log(error)
+        } else {
+            if (result.length){
+
+                res.render("error", {
+                    message: `The ${email} already exists in the database.  Please register with a different email.`
+                })
+
+            } else {
+
+                db.query(sqlQueryInsert, user, (error, result) => {
+                    if (error) {
+
+                        res.render("error", {
+                            
+                            message: `unable to register user ${first_name} ${surname}`
+                        });
+
+                    } else {
+
+                        res.render("register", {
+                            firstNameRegistered: first_name, 
+                            surnameRegistered: surname
+                        })
+                    }
+                });
+            }
+        }
+    });
+
+    
 });
 
 app.get("/update/:id", (req, res) => {
@@ -97,8 +152,6 @@ app.post("/update/:id", (req, res) => {
 });
 
 app.post("/delete/:id", (req, res) => {
-  console.log(`id in delete ${req.params.id}`)
-   console.log(`in delete ${req.body.userName}`)
 
     const id = req.params.id;
     const userName = req.body.userName;
@@ -107,16 +160,18 @@ app.post("/delete/:id", (req, res) => {
 
     db.query(sqlDeleteQuery, user, (error, results) => {
         if (error) {
-            console.log(error)
             res.send(`unable to delete user ${id}`)
         } else {
-            console.log(results);
             res.render("delete", {
                 deletedUserId: id,
                 userName: userName
             });
         }
     });
+});
+
+app.get("/error", (req, res) => {
+    res.render("error")
 });
 
 app.get("*", (req, res) => {

@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register User</title>
+</head>
+<body>
+    <h1>Register a new user</h1>
     <form action="/register" method="POST">
         <label for="first_name" >first name</label>
         <input type="text" name="first_name"><br>
@@ -11,13 +14,14 @@
         <input type="text" name="surname"><br>
         <label for="email">email</label>
         <input type="text" name="email"><br>
-        <label type="text" name="password">password</label>
+        <label for="password">password</label>
         <input type="text" name="password">
         <br>
-        <button type="submit">Update User</button>
+        <button type="submit">Register New User</button>
     </form>
-</head>
-<body>
-    
+
+    {{#if firstNameRegistered}}
+        <p>{{firstNameRegistered}} {{surnameRegistered}} has been registered as a user.</p>
+    {{/if}}
 </body>
 </html>
