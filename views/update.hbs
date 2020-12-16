@@ -20,6 +20,8 @@
         <button type="submit">Update User</button>
     </form>
 
-    <p>User {{updatedName}} {{updatedSurname}} has been updated</p>
+    {{#if updatedName}}
+    <p>User {{updatedName}} {{updatedSurname}} has been updated.</p>
+    {{/if}}
 </body>
 </html>
