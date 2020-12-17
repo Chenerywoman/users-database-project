@@ -18,7 +18,7 @@
        </form>
 
         <form action="/delete/{{this.id}}" method="POST">
-            <input class="user-to-delete" type="text" name="userName" value="{{this.first_name}} {{this.surname}}">
+            <input class="user-to-delete" type="hidden" name="userName" value="{{this.first_name}} {{this.surname}}">
             <button type="submit">Delete User</button>
         </form>
 
