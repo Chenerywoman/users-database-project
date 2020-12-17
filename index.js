@@ -139,26 +139,47 @@ app.post("/update/:id", (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
+    const sqlQueryEmailCheck = "SELECT * FROM users WHERE email = ?";
+
     const sqlQuery = 'UPDATE users SET first_name = ?, surname  = ?, email = ?, password = ? WHERE id = ?';
 
-    const user = [first_name, surname, email, password, id]
+    const emailParam = [email];
+    const user = [first_name, surname, email, password, id];
 
-    db.query(sqlQuery, user, (error, results) => {
+    db.query(sqlQueryEmailCheck, emailParam, (error, result) => {
         if (error) {
             console.log(error)
-            res.render("update", {
-                notUpdated: id,
-                firstName: first_name, 
-                surname: surname
-            })
+            res.redirect("/error");
         } else {
-           
-            res.render("update", {
-                name: first_name,
-                secondname: surname
-            });
+            if (result.length > 0) {
+
+                res.render("update", {
+                    existingEmail: email
+                });
+
+            } else {
+
+                db.query(sqlQuery, user, (error, results) => {
+                    if (error) {
+                        console.log(error)
+                        res.render("update", {
+                            notUpdated: id,
+                            firstName: first_name, 
+                            surname: surname
+                        })
+
+                    } else {
+                       
+                        res.render("update", {
+                            name: first_name,
+                            secondname: surname
+                        });
+                    }
+                })
+            }
         }
-    })
+    });
+
 });
 
 app.post("/delete/:id", (req, res) => {
@@ -166,7 +187,7 @@ app.post("/delete/:id", (req, res) => {
     const id = req.params.id;
 
     const userName = req.body.userName;
-    const sqlSelectQuery = 'SELECT * FROM users WHERE id = ?';
+    const sqlSelectQuery = 'SELECT * FROM users WHERE email = ?';
     const sqlDeleteQuery = 'DELETE FROM users WHERE id = ?';
     const user = [id];
 
@@ -195,7 +216,6 @@ app.post("/delete/:id", (req, res) => {
         }
 
     });
-
 });
 
 app.get("/error", (req, res) => {
