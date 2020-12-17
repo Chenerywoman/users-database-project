@@ -72,14 +72,15 @@ app.post("/register", (req, res) => {
         if (error) {
             console.log(error)
         } else {
-            if (result.length) {
+            if (result.length > 0) {
                 console.log("in result.length")
                     // app.get("/error", (req, res) => {
                     //     console.log("in app.get")
-                            res.render("error", {
-                            message: `The ${email} already exists in the database.  Please register with a different email.`
-                            })
+                            // res.render("error", {
+                            // message: `The ${email} already exists in the database.  Please register with a different email.`
+                            // })
                         // })
+                        res.redirect("/error")
                 } else {
 
                 db.query(sqlQueryInsert, user, (error, result) => {
