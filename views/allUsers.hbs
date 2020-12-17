@@ -9,21 +9,29 @@
 <body>
      {{>Nav}}
     <h1>All users</h1>
-    {{#each users}}
-    <p>
-        name: {{this.first_name}} {{this.surname}}
-        email: {{this.email}}
+    <div class="users">
+        {{#each users}}
+            <div class="user">
+                <table>
+                    <tr>
+                        <td>name:</td>
+                        <td>{{this.first_name}} {{this.surname}}</td>
+                    </tr>
+                    <tr>
+                        <td>email:</td>
+                        <td>{{this.email}}</td>
+                </table>
 
-       <form action="/update/{{this.id}}" method="GET">
-            <button type="submit">Update User</button>
-       </form>
+                <form class="update" action="/update/{{this.id}}" method="GET">
+                        <button type="submit">Update</button>
+                </form>
 
-        <form action="/delete/{{this.id}}" method="POST">
-            <input class="user-to-delete" type="hidden" name="userName" value="{{this.first_name}} {{this.surname}}">
-            <button type="submit">Delete User</button>
-        </form>
-
-    </p>
-    {{/each}}
+                <form class="delete" action="/delete/{{this.id}}" method="POST">
+                    <input class="user-to-delete" type="hidden" name="userName" value="{{this.first_name}} {{this.surname}}">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        {{/each}}
+    </div>
 </body>
 </html>

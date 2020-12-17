@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/update.css">
     <title>Update User</title>
 </head>
 <body>
     {{>Nav}}
-    {{#if first_name}}
     <h1>Update User</h1>
-    <form action="/update/{{id}}" method="POST">
+   
+    <form class="update" action="/update/{{id}}" method="POST">
         <label for="first_name" >first name</label>
         <input type="text" name="first_name" value={{first_name}}><br>
         <label for="surname">surname</label>
@@ -18,21 +19,21 @@
         <input type="text" name="email" value={{email}}><br>
         <label type="text" name="password">password</label>
         <input type="text" name="password" value={{password}}>
-        <br>
-        <button type="submit">Update User</button>
+        <button type="submit">Update</button>
     </form>
-    {{/if}}
 
-    {{#if updatedName}}
-    <p>User {{updatedName}} {{updatedSurname}} has been updated.</p>
-    {{/if}}
+    {{#if name}}
+        <p>User {{name}} {{secondname}} has been updated.</p>
 
-    {{#if notFound}}
+
+        {{else if notFound}}
         <p> User number {{notFound}} not found.</p>
+    
+
+            {{else if notUpdated}}
+                <p>Unable to update {{firstName}} {{surname}} with user number {{notUpdated}}.</p>
+            
     {{/if}}
 
-    {{#if notUpdated}}
-        <p>Unable to update {{firstName}} {{surname}} with user number {{notUpdated}}.</p>
-    {{/if}}
 </body>
 </html>

@@ -146,15 +146,16 @@ app.post("/update/:id", (req, res) => {
     db.query(sqlQuery, user, (error, results) => {
         if (error) {
             console.log(error)
-            res.render("update",{
+            res.render("update", {
                 notUpdated: id,
                 firstName: first_name, 
                 surname: surname
             })
         } else {
+           
             res.render("update", {
-                updatedName: first_name,
-                updatedSurname: surname
+                name: first_name,
+                secondname: surname
             });
         }
     })
@@ -176,7 +177,7 @@ app.post("/delete/:id", (req, res) => {
                 message: `unable to find user ${userName} with id ${id} to delete.`
             });
         } else {
-            const fullName = results[0].first_name + results[0].surname;
+            const fullName = `${results[0].first_name}  ${results[0].surname}`;
 
             db.query(sqlDeleteQuery, user, (error, results) => {
                 if (error) {
