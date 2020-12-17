@@ -2,6 +2,7 @@ const express = require("express");
 const mysql = require("mysql");
 const path = require("path");
 const hbs = require("hbs");
+const { static } = require("express");
 const app = express();
 
 const db = mysql.createConnection({
@@ -24,7 +25,7 @@ const viewsPath = path.join(__dirname, "/views");
 const partialPath = path.join(__dirname, "views/inc");
 const publicDirectory = path.join(__dirname, "/public");
 
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static(publicDirectory));
 
@@ -40,9 +41,9 @@ app.get("/", (req, res) => {
 app.get("/allUsers", (req, res) => {
     const sqlQuery = 'SELECT * FROM users';
 
-    db.query(sqlQuery,(error, results) =>{
+    db.query(sqlQuery, (error, results) => {
         res.render("allUsers", {
-            users:results
+            users: results
         });
     });
 });
@@ -63,7 +64,7 @@ app.post("/register", (req, res) => {
 
     const sqlQueryEmailCheck = "SELECT * FROM users WHERE email = ?";
     const sqlQueryInsert = "INSERT INTO users (first_name, surname, email, password) VALUES (?, ?, ?, ?)";
-    
+
     const emailParam = [email]
     const user = [first_name, surname, email, password];
 
@@ -71,26 +72,28 @@ app.post("/register", (req, res) => {
         if (error) {
             console.log(error)
         } else {
-            if (result.length){
-
-                res.render("error", {
-                    message: `The ${email} already exists in the database.  Please register with a different email.`
-                })
-
-            } else {
+            if (result.length) {
+                console.log("in result.length")
+                    // app.get("/error", (req, res) => {
+                    //     console.log("in app.get")
+                            res.render("error", {
+                            message: `The ${email} already exists in the database.  Please register with a different email.`
+                            })
+                        // })
+                } else {
 
                 db.query(sqlQueryInsert, user, (error, result) => {
                     if (error) {
 
                         res.render("error", {
-                            
+
                             message: `unable to register user ${first_name} ${surname}`
                         });
 
                     } else {
 
                         res.render("register", {
-                            firstNameRegistered: first_name, 
+                            firstNameRegistered: first_name,
                             surnameRegistered: surname
                         })
                     }
@@ -99,7 +102,7 @@ app.post("/register", (req, res) => {
         }
     });
 
-    
+
 });
 
 app.get("/update/:id", (req, res) => {
@@ -110,7 +113,7 @@ app.get("/update/:id", (req, res) => {
 
     db.query(sqlQuery, user, (error, results) => {
         if (error) {
-            res.send(`User number ${id} not found` )
+            res.send(`User number ${id} not found`)
         } else {
 
             let userDetails = results[0];
@@ -154,20 +157,39 @@ app.post("/update/:id", (req, res) => {
 app.post("/delete/:id", (req, res) => {
 
     const id = req.params.id;
+
     const userName = req.body.userName;
+    const sqlSelectQuery = 'SELECT * FROM users WHERE id = ?';
     const sqlDeleteQuery = 'DELETE FROM users WHERE id = ?';
     const user = [id];
 
-    db.query(sqlDeleteQuery, user, (error, results) => {
+    db.query(sqlSelectQuery, user, (error, results) => {
+
         if (error) {
-            res.send(`unable to delete user ${id}`)
+            res.render("error", {
+                message: `unable to find user ${userName} with id ${id} to delete.`
+            });
         } else {
-            res.render("delete", {
-                deletedUserId: id,
-                userName: userName
+            const fullName = results[0].first_name + results[0].surname;
+
+            db.query(sqlDeleteQuery, user, (error, results) => {
+                if (error) {
+                    res.render("error", {
+                        message: `unable to delete user ${fullName} with id: ${id}`
+                    })
+
+                } else {
+                    res.render("delete", {
+                        deletedUserId: id,
+                        deletedName:fullName    
+                    });
+                }
             });
         }
+
     });
+
+
 });
 
 app.get("/error", (req, res) => {
