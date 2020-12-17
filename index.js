@@ -62,6 +62,8 @@ app.post("/register", (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
+    const emailRegex = /^[A-Za-z0-9._-]+@([A-Za-z0-9_-]+\.)+[A-Za-z0-9_-]+$/
+
     const sqlQueryEmailCheck = "SELECT * FROM users WHERE email = ?";
     const sqlQueryInsert = "INSERT INTO users (first_name, surname, email, password) VALUES (?, ?, ?, ?)";
 
