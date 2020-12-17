@@ -35,6 +35,10 @@ h1 {
     width: 70%;
 }
 
+#register-email:invalid {
+    background-color: #EF233C;
+}
+
 .register button {
     display: block;
     margin: 2em auto 1em auto;
