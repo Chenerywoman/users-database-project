@@ -71,23 +71,20 @@ app.post("/register", (req, res) => {
     db.query(sqlQueryEmailCheck, emailParam, (error, result) => {
         if (error) {
             console.log(error)
+            res.redirect("/error");
         } else {
             if (result.length > 0) {
-                console.log("in result.length")
-                    // app.get("/error", (req, res) => {
-                    //     console.log("in app.get")
-                            // res.render("error", {
-                            // message: `The ${email} already exists in the database.  Please register with a different email.`
-                            // })
-                        // })
-                        res.redirect("/error")
-                } else {
+                
+                res.render("register", {
+                    existingEmail: email
+                });
+            
+            } else {
 
                 db.query(sqlQueryInsert, user, (error, result) => {
                     if (error) {
 
                         res.render("error", {
-
                             message: `unable to register user ${first_name} ${surname}`
                         });
 
@@ -96,7 +93,7 @@ app.post("/register", (req, res) => {
                         res.render("register", {
                             firstNameRegistered: first_name,
                             surnameRegistered: surname
-                        })
+                        });
                     }
                 });
             }
@@ -114,7 +111,10 @@ app.get("/update/:id", (req, res) => {
 
     db.query(sqlQuery, user, (error, results) => {
         if (error) {
-            res.send(`User number ${id} not found`)
+            console.log(error)
+            res.render("update",{
+                notFound: id
+            })
         } else {
 
             let userDetails = results[0];
@@ -145,7 +145,12 @@ app.post("/update/:id", (req, res) => {
 
     db.query(sqlQuery, user, (error, results) => {
         if (error) {
-            res.send("unable to update user")
+            console.log(error)
+            res.render("update",{
+                notUpdated: id,
+                firstName: first_name, 
+                surname: surname
+            })
         } else {
             res.render("update", {
                 updatedName: first_name,
@@ -176,7 +181,7 @@ app.post("/delete/:id", (req, res) => {
             db.query(sqlDeleteQuery, user, (error, results) => {
                 if (error) {
                     res.render("error", {
-                        message: `unable to delete user ${fullName} with id: ${id}`
+                        message: `unable to delete user ${fullName} with id: ${id}.`
                     })
 
                 } else {
@@ -189,7 +194,6 @@ app.post("/delete/:id", (req, res) => {
         }
 
     });
-
 
 });
 
