@@ -10,6 +10,7 @@
     {{>Nav}}
     <h1>Update User</h1>
    
+   {{#if first_name}}
     <form class="update" action="/update/{{id}}" method="POST">
         <label for="first_name" >first name</label>
         <input type="text" name="first_name" value={{first_name}}><br>
@@ -21,6 +22,7 @@
         <input type="text" name="password" value={{password}}>
         <button type="submit">Update</button>
     </form>
+    {{/if}}
 
     {{#if name}}
         <p>User {{name}} {{secondname}} has been updated.</p>
