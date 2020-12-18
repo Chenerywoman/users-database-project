@@ -9,5 +9,15 @@
 <body>
     {{>Nav}}
     <h1>All Blogs</h1>
+
+    <div class="individual-blogs-container">
+        {{#each blogs}}
+            <div class="individual-blog">
+                <h4>{{this.title}}</h4>
+                <p>{{this.blog}}</p>
+            </div>
+        {{/each}}
+    </div>
+    
 </body>
 </html>
