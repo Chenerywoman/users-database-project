@@ -58,15 +58,27 @@ form {
 .update button {
     margin: 0.25em 1em;
     background-color: #EDF2F4;
+    border: 1px solid #EDF2F4;;
     padding: 0.25em;
     font-size: 1em;
     border-radius: 15%;
+    color: #2B2D42;
     
 }
 
 .delete button {
     margin: 0.25em 1em;
     background-color: #D90429;
+    padding: 0.25em;
+    font-size: 1em;
+    border-radius: 15%;
+    border: 1px solid #D90429;
+    color: #EDF2F4;
+}
+
+.profile button {
+    margin: 0.25em 1em;
+    background-color: #2B2D42;
     padding: 0.25em;
     font-size: 1em;
     border-radius: 15%;
