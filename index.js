@@ -60,8 +60,6 @@ app.post("/register", (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    const emailRegex = /^[A-Za-z0-9._-]+@([A-Za-z0-9_-]+\.)+[A-Za-z0-9_-]+$/
-
     const sqlQueryEmailCheck = "SELECT * FROM users WHERE email = ?";
     const sqlQueryInsert = "INSERT INTO users (first_name, surname, email, password) VALUES (?, ?, ?, ?)";
 
@@ -260,6 +258,55 @@ app.get("/profile/:id", (req, res) => {
 
     });
 });
+
+app.get("/newblog/:id", (req, res) => {
+
+    const id = req.params.id;
+    
+    res.render("newblog", {
+        id: id
+    })
+});
+
+
+app.post("/newblog/:id", (req, res) => {
+    const id = req.params.id;
+
+    const title = req.body.title;
+    const blog = req.body.blog;
+
+    const today = new Date();
+    const dd  = today.getDate();
+    const mm = today.getMonth();
+    const yyyy = today.getFullYear();
+    const dateSQL = `${yyyy}-${mm}-${dd}`;
+
+    const sqlQuery = "INSERT INTO blogs (userId, title, blog, date) VALUES (?, ?, ?, ?)";
+
+    const values = [id, title, blog, dateSQL];
+
+    db.query(sqlQuery, values, (error, result) => {
+
+        if (error){
+            console.log(error);
+        } else {
+            console.log(result);
+            res.render("newblog", {
+                submitted: true,
+                title: title,
+                insertId: result.insertId
+            })
+        }
+    });
+});
+
+app.get("/allblogs/:id", (req, res) => {
+
+
+
+    const id = req.params.id;
+    res.render("allblogs")
+})
 
 app.get("/error", (req, res) => {
     res.render("error")
