@@ -13,10 +13,22 @@
     {{#if profile}}
 
         <h2>{{firstName}} {{surname}}</h2>
-        <p>email: {{email}}</p>
-        <p>user id: {{id}}</p>
+        <table class="profile-table">
+            <tr>
+                <td>
+                    email
+                </td>
+                <td>
+                    {{email}}
+                </td>
+            </tr>
+            <tr>
+                <td>user id</td>
+                <td>{{id}}</td>
+            </tr>
+        </table>
 
-        <h3>Blog Posts</h3>
+        <h2>Blog Posts</h2>
         <p>Click on the buttons to acccess {{firstName}} {{surname}}'s posts or create a new post.</p>
         <div class="blog-buttons">
             <form class="new-blog" action="/newblog/{{this.id}}" method="GET">
