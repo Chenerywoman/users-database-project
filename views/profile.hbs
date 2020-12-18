@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/profile.css">
+    <title>Profile</title>
+</head>
+<body>
+    {{>Nav}}
+        <h1>Profile Page</h1>
+
+    {{#if profile}}
+
+        <h2>{{firstName}} {{surname}}</h2>
+        <p>email: {{email}}</p>
+        <p>user id: {{id}}</p>
+
+        <h3>Blog Posts</h3>
+        <p>Click on the buttons to acccess {{firstName}} {{surname}}'s posts or create a new post.</p>
+        <div class="blog-buttons">
+            <form class="new-blog" action="/newblog/{{this.id}}" method="GET">
+                    <button type="submit">New</button>
+            </form>
+            <form class="all-blogs" action="/allblogs/{{this.id}}" method="GET">
+                    <button type="submit">Blogs</button>
+            </form>
+        </div>
+  
+
+    {{else}}
+        <p>No profile found for user with id {{id}}</p>
+
+    {{/if}}
+
+</body>
+</html>
