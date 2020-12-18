@@ -42,6 +42,8 @@ app.get("/allUsers", (req, res) => {
     const sqlQuery = 'SELECT * FROM users';
 
     db.query(sqlQuery, (error, results) => {
+        console.log('results in allUsers')
+        console.log(results)
         res.render("allUsers", {
             users: results
         });
@@ -76,7 +78,6 @@ app.post("/register", (req, res) => {
             res.redirect("/error");
         } else {
             if (result.length > 0) {
-                
                 res.render("register", {
                     existingEmail: email
                 });
@@ -85,13 +86,15 @@ app.post("/register", (req, res) => {
 
                 db.query(sqlQueryInsert, user, (error, result) => {
                     if (error) {
-
+                        console.log('in register error')
+                        console.log(error)
                         res.render("error", {
                             message: `unable to register user ${first_name} ${surname}`
                         });
 
                     } else {
-
+                        console.log('in successful register else')
+                        console.log(result)
                         res.render("register", {
                             firstNameRegistered: first_name,
                             surnameRegistered: surname
@@ -187,28 +190,38 @@ app.post("/update/:id", (req, res) => {
 app.post("/delete/:id", (req, res) => {
 
     const id = req.params.id;
-
+    console.log(`${id} is id in delete`)
     const userName = req.body.userName;
-    const sqlSelectQuery = 'SELECT * FROM users WHERE email = ?';
+    const sqlSelectQuery = 'SELECT * FROM users WHERE id = ?';
     const sqlDeleteQuery = 'DELETE FROM users WHERE id = ?';
     const user = [id];
+    console.log('user in delete')
+    console.log(user)
 
     db.query(sqlSelectQuery, user, (error, results) => {
 
         if (error) {
+            console.log('in first error')
+            console.log(error)
             res.render("error", {
                 message: `unable to find user ${userName} with id ${id} to delete.`
             });
         } else {
+            console.log('in first else')
+            console.log(results)
             const fullName = `${results[0].first_name}  ${results[0].surname}`;
 
             db.query(sqlDeleteQuery, user, (error, results) => {
                 if (error) {
+                    console.log('in second error')
+                    console.log(error)
                     res.render("error", {
                         message: `unable to delete user ${fullName} with id: ${id}.`
                     })
 
                 } else {
+                    console.log('in second else')
+                    console.log(results)
                     res.render("delete", {
                         deletedUserId: id,
                         deletedName:fullName    
