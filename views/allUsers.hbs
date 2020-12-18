@@ -30,6 +30,10 @@
                     <input class="user-to-delete" type="hidden" name="userName" value="{{this.first_name}} {{this.surname}}">
                     <button type="submit">Delete</button>
                 </form>
+
+                <form class="profile" action="/profile/{{this.id}}" method="GET">
+                    <button type="submit">Profile</button>
+                </form>
             </div>
         {{/each}}
     </div>
