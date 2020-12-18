@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="/css/newblog.css">
+
+    <title>New Blog</title>
+</head>
+<body>
+    {{>Nav}}
+    <h1>Create new blog</h1>
+
+      <form class="generate-blog" action="/newblog/{{id}}" method="POST">
+        <label for="title">title</label>
+        <input class="title" type="text" name="title"><br>
+        <label for="blog">blog</label>
+        <input class="blog" type="textarea" name="blog"><br>
+        <br>
+        <button type="submit">Create</button>
+        </form>
+    
+    {{#if submitted}}
+        <p>New blog {{title}} uploaded to the users database with blog id {{insertId}}.</p>
+    {{/if}}
+
+</body>
+</html>
