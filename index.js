@@ -193,21 +193,31 @@ app.post("/delete/:id", (req, res) => {
                 message: `unable to find user ${userName} with id ${id} to delete.`
             });
         } else {
-            const fullName = `${results[0].first_name}  ${results[0].surname}`;
 
-            db.query(sqlDeleteQuery, user, (error, results) => {
-                if (error) {
-                    res.render("error", {
-                        message: `unable to delete user ${fullName} with id: ${id}.`
-                    })
+            if (results.length < 1) {
+                res.render("delete", {
+                    alreadyDeleted: true,
+                    id: id,
+                    userName: userName
+                });
+            } else {
 
-                } else {
-                    res.render("delete", {
-                        deletedUserId: id,
-                        deletedName:fullName    
-                    });
-                }
-            });
+                const fullName = `${results[0].first_name}  ${results[0].surname}`;
+
+                db.query(sqlDeleteQuery, user, (error, results) => {
+                    if (error) {
+                        res.render("error", {
+                            message: `unable to delete user ${fullName} with id: ${id}.`
+                        })
+
+                    } else {
+                        res.render("delete", {
+                            deletedUserId: id,
+                            deletedName: fullName
+                        });
+                    }
+                });
+            }
         }
 
     });

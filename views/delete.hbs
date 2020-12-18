@@ -9,6 +9,12 @@
 <body>
     {{>Nav}}
     <h1>Delete User</h1>
-    <p>User {{deletedName}} with id: {{deletedUserId}} has been deleted</p>
+    {{#if deletedName}}
+    <p>User {{deletedName}} with id {{deletedUserId}} has been deleted</p>
+    {{/if}}
+
+    {{#if alreadyDeleted}}
+         <p>User {{userName}} with id {{id}} has already been deleted.</p>
+    {{/if}}
 </body>
 </html>
