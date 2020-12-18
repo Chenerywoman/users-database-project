@@ -1,0 +1,33 @@
+body {
+    background-color: #EDF2F4;
+    color: #2B2D42;
+    text-align: center;
+    margin: 0;
+}
+
+h1 {
+    margin-top: 2em;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.generate-blog{
+    margin: 8em auto 2em auto;
+    width: 400px;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    border: 1px solid #2B2D42;
+    border-radius: 5%;
+    padding: 1em;
+    background-color: #8D99AE
+}
+
+input {
+    width: 300px;
+}
+
+.blog{
+    height: 200px;
+    
+}
