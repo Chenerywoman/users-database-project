@@ -289,12 +289,14 @@ app.post("/newblog/:id", (req, res) => {
 
         if (error){
             console.log(error);
+            res.redirect("error");
         } else {
             console.log(result);
             res.render("newblog", {
                 submitted: true,
                 title: title,
-                insertId: result.insertId
+                insertId: result.insertId,
+                id: id
             })
         }
     });
@@ -302,10 +304,25 @@ app.post("/newblog/:id", (req, res) => {
 
 app.get("/allblogs/:id", (req, res) => {
 
-
-
     const id = req.params.id;
-    res.render("allblogs")
+
+    const sqlBlogQuery = 'SELECT * FROM blogs where userId = ?';
+    const user = [id];
+
+    db.query(sqlBlogQuery, user, (error, results) => {
+
+        if (error) {
+            console.log(error);
+            res.redirect("error");
+        } else {
+            console.log(results)
+            res.render("allblogs", {
+                id: id,
+                blogs: results
+            })
+        }
+    });
+
 })
 
 app.get("/error", (req, res) => {
