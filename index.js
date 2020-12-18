@@ -3,6 +3,7 @@ const mysql = require("mysql");
 const path = require("path");
 const hbs = require("hbs");
 const { static } = require("express");
+const e = require("express");
 const app = express();
 
 const db = mysql.createConnection({
@@ -218,6 +219,43 @@ app.post("/delete/:id", (req, res) => {
                     }
                 });
             }
+        }
+
+    });
+});
+
+app.get("/profile/:id", (req, res) => {
+
+    const id = req.params.id;
+    const sqlQuery = 'SELECT * FROM users WHERE id = ?';
+    const user = [id];
+
+    db.query(sqlQuery, user, (error, result) => {
+
+        if (error) {
+            console.log(error)
+            res.redirect("error")
+
+        } else {
+
+            if (result.length < 1) {
+                
+                res.render("profile", {
+                    profile: false,
+                    id: id
+                });
+
+            } else {
+
+                res.render("profile", {
+                    profile: true,
+                    firstName:result[0].first_name,
+                    surname:result[0].surname,
+                    email: result[0].email,
+                    id: id
+                });
+            }
+           
         }
 
     });
