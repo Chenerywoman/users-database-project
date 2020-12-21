@@ -9,19 +9,27 @@
 </head>
 <body>
     {{>Nav}}
-    <h1>Create new blog</h1>
+    <h1>Create new blog for user {{userName}}</h1>
 
-      <form class="generate-blog" action="/newblog/{{id}}" method="POST">
+    {{#if noId}}
+        <p class="no-id-blog">Unable to upload a blog: no user with id {{id}} found in the database.</p>
+
+    {{else}}
+    
+          <form class="generate-blog" action="/newblog/{{id}}" method="POST">
         <label for="title">title</label>
         <input class="title" type="text" name="title"><br>
         <label for="blog">blog</label>
         <input class="blog" type="textarea" name="blog"><br>
+        <input type="hidden" name="userName" value='{{userName}}'>
         <br>
         <button type="submit">Create</button>
         </form>
+
+    {{/if}}
     
     {{#if submitted}}
-        <p>New blog {{title}} uploaded to the users database with blog id {{insertId}}.</p>
+        <p>New blog {{title}} by {{userName}} uploaded to the users database.</p>
     {{/if}}
 
 </body>
