@@ -311,18 +311,6 @@ app.post("/newblog/:id", (req, res) => {
     const sqlInsertQuery = "INSERT INTO blogs (userId, title, blog, date) VALUES (?, ?, ?, ?)";
     const values = [id, title, blog, dateSQL];
 
-    // db.query(sqlSelectQuery, user, (error, resultUser) => {
-    //     console.log(user)
-    //     if (error) {
-    //         console.log(error);
-    //         res.redirect("error")
-    //     } else if (resultUser.length < 1) {
-    //         res.render("newblog", {
-    //             noId: true,
-    //             id: id
-    //         })
-    //     } else {
-    //         const userName = `${resultUser[0].first_name} ${resultUser[0].surname}`;
             db.query(sqlInsertQuery, values, (error, resultInsert) => {
 
                 if (error){
@@ -337,10 +325,6 @@ app.post("/newblog/:id", (req, res) => {
                     })
                 }
             });
-        // }
-    // });
-
-    
 });
 
 app.get("/allblogs/:id", (req, res) => {
