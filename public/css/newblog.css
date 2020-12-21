@@ -34,3 +34,18 @@ input {
 .no-id-blog {
     margin: 8em auto 2em auto;
 }
+
+.back-to-profile{
+    text-decoration: none;
+    background-color: #D90429;
+    border-radius: 5%;
+    padding: 0.5em;
+}
+
+.back-to-profile:link {
+    color: #2B2D42;
+}
+
+.back-to-profile:visited{
+    color: #EDF2F4;
+}
