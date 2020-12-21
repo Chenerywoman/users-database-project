@@ -301,7 +301,7 @@ app.post("/newblog/:id", (req, res) => {
 
     const today = new Date();
     const dd  = today.getDate();
-    const mm = today.getMonth();
+    const mm = today.getMonth() + 1;
     const yyyy = today.getFullYear();
     const dateSQL = `${yyyy}-${mm}-${dd}`;
 
@@ -331,24 +331,41 @@ app.get("/allblogs/:id", (req, res) => {
 
     const id = req.params.id;
 
+    const sqlUserQuery = 'SELECT * FROM users where id = ?'
     const sqlBlogQuery = 'SELECT * FROM blogs where userId = ?';
     const user = [id];
-
-    db.query(sqlBlogQuery, user, (error, results) => {
-
+    
+    db.query(sqlUserQuery, user, (error, result) => {
         if (error) {
             console.log(error);
-            res.redirect("error");
-        } else {
-            console.log(results)
+            res.redirect("error")
+        } else if (result.length < 1) {
             res.render("allblogs", {
-                id: id,
-                blogs: results
+                noId: true,
+                id: id
             })
+        } else {
+            const userName = `${result[0].first_name} ${result[0].surname}`;
+            db.query(sqlBlogQuery, user, (error, results) => {
+
+                if (error) {
+                    console.log(error);
+                    res.redirect("error");
+                } else {
+                    console.log(results)
+                    res.render("allblogs", {
+                        id: id,
+                        userName: userName,
+                        blogs: results
+        
+                    });
+                }
+            });
+
         }
     });
+});
 
-})
 
 app.get("/error", (req, res) => {
     res.render("error")
