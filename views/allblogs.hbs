@@ -27,8 +27,10 @@
        <a class="back-to-profile" href="/profile/{{id}}">Back to {{userName}}'s profile</a>
     {{/if}}
      
-        <form class="toggle" action="/allblogs/{{this.id}}" method="POST">
-                <button type="submit">Latest</button>
+        <form class="toggle" action="/allblogs/{{id}}" method="POST">
+                <input type="hidden" name="userName" value="{{userName}}">
+                <input type="hidden" name="ascending" value="{{ascending}}">
+                <button type="submit">{{#if ascending}}Descending{{else}}Ascending{{/if}}</button>
         </form>
        
     </div>
