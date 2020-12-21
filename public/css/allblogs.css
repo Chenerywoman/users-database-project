@@ -14,4 +14,36 @@ h1 {
 
 .individual-blogs-container{
     margin-top: 8em;
+    margin-bottom: 4em;
+}
+
+.individual-blog{
+    margin: 0.3em 0 0.3em 0;
+}
+
+
+.individual-blog a{
+    text-decoration: none;
+}
+
+.back-to-profile{
+    text-decoration: none;
+    background-color: #D90429;
+    border-radius: 5%;
+    padding: 0.5em;
+    margin: 0 auto 0 auto;
+}
+
+.back-to-profile:link {
+    color: #2B2D42;
+}
+
+.back-to-profile:visited{
+    color: #EDF2F4;
+}
+
+.bottom-element-container{
+    position: fixed;
+    bottom: 1em;
+    width: 100%;
 }
