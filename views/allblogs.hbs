@@ -8,16 +8,30 @@
 </head>
 <body>
     {{>Nav}}
-    <h1>All Blogs</h1>
+    <h1>All Blogs {{#if userName}}for {{userName}}{{/if}}</h1>
 
     <div class="individual-blogs-container">
         {{#each blogs}}
             <div class="individual-blog">
-                <h4>{{this.title}}</h4>
-                <p>{{this.blog}}</p>
+                <a href="">{{this.title}}</a>
             </div>
         {{/each}}
     </div>
     
+    {{#if noId}}
+        <p>No user with id {{id}} found.</p>
+    {{/if}}
+
+    <div class="bottom-element-container">
+    {{#if userName}} 
+       <a class="back-to-profile" href="/profile/{{id}}">Back to {{userName}}'s profile</a>
+    {{/if}}
+     
+        <form class="toggle" action="/allblogs/{{this.id}}" method="POST">
+                <button type="submit">Latest</button>
+        </form>
+       
+    </div>
+
 </body>
 </html>
