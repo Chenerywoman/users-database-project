@@ -16,21 +16,21 @@ nav ul {
     margin:0;
 }
 
-li {
+nav ul li {
     padding-left: 1rem;
 }
 
-a{
+nav ul li a{
     text-decoration: none;
     background-color: #EF233C;
     border-radius: 5%;
     padding: 0.5em;
 }
 
-a:link{
+nav ul li a:link {
     color: #2B2D42;
 }
 
-a:visited{
+nav ul li a:visited{
     color: #EDF2F4;
 }
