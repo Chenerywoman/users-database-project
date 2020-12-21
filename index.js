@@ -225,6 +225,7 @@ app.post("/delete/:id", (req, res) => {
 app.get("/profile/:id", (req, res) => {
 
     const id = req.params.id;
+    const userName = req.body.userName;
     const sqlQuery = 'SELECT * FROM users WHERE id = ?';
     const user = [id];
 
@@ -262,15 +263,38 @@ app.get("/profile/:id", (req, res) => {
 app.get("/newblog/:id", (req, res) => {
 
     const id = req.params.id;
-    
-    res.render("newblog", {
-        id: id
+
+    const sqlSelectQuery = 'SELECT * FROM users WHERE id = ?';
+    const user = [id];
+
+    db.query(sqlSelectQuery, user, (error, result) => {
+        console.log(user)
+        if (error) {
+            console.log(error);
+            res.redirect("error")
+        } else if (result.length < 1) {
+            res.render("newblog", {
+                noId: true,
+                id: id
+            })
+        } else {
+            const userName = `${result[0].first_name} ${result[0].surname}`;
+            console.log(`userName: ${userName}`)
+            res.render("newblog", {
+                id: id,
+                userName: userName
+            })
+
+        }
     })
 });
 
 
 app.post("/newblog/:id", (req, res) => {
     const id = req.params.id;
+    console.log('req.body')
+    console.log(req.body)
+    userName = req.body.userName;
 
     const title = req.body.title;
     const blog = req.body.blog;
@@ -281,25 +305,42 @@ app.post("/newblog/:id", (req, res) => {
     const yyyy = today.getFullYear();
     const dateSQL = `${yyyy}-${mm}-${dd}`;
 
-    const sqlQuery = "INSERT INTO blogs (userId, title, blog, date) VALUES (?, ?, ?, ?)";
+    const sqlSelectQuery = 'SELECT * FROM users WHERE id = ?';
+    const user = [id];
 
+    const sqlInsertQuery = "INSERT INTO blogs (userId, title, blog, date) VALUES (?, ?, ?, ?)";
     const values = [id, title, blog, dateSQL];
 
-    db.query(sqlQuery, values, (error, result) => {
+    // db.query(sqlSelectQuery, user, (error, resultUser) => {
+    //     console.log(user)
+    //     if (error) {
+    //         console.log(error);
+    //         res.redirect("error")
+    //     } else if (resultUser.length < 1) {
+    //         res.render("newblog", {
+    //             noId: true,
+    //             id: id
+    //         })
+    //     } else {
+    //         const userName = `${resultUser[0].first_name} ${resultUser[0].surname}`;
+            db.query(sqlInsertQuery, values, (error, resultInsert) => {
 
-        if (error){
-            console.log(error);
-            res.redirect("error");
-        } else {
-            console.log(result);
-            res.render("newblog", {
-                submitted: true,
-                title: title,
-                insertId: result.insertId,
-                id: id
-            })
-        }
-    });
+                if (error){
+                    console.log(error);
+                    res.redirect("error");
+                } else {
+                    res.render("newblog", {
+                        submitted: true,
+                        title: title,
+                        id: id,
+                        userName: userName
+                    })
+                }
+            });
+        // }
+    // });
+
+    
 });
 
 app.get("/allblogs/:id", (req, res) => {
