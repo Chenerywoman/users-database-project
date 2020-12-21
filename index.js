@@ -329,16 +329,11 @@ app.post("/newblog/:id", (req, res) => {
 app.get("/allblogs/:id", (req, res) => {
 
     const id = req.params.id;
-    const ascending = req.body.ascending;
-    console.log(`ascending in get: ${ascending}`);
-    const order = ascending ? 'ASC' : 'DESC';
-    console.log(`order: ${order}`)
 
     const sqlUserQuery = 'SELECT first_name, surname FROM users where id = ?';
     const user = [id]
 
-    const sqlBlogQueryASC = 'SELECT id, title, blog, date FROM blogs where userId = ? ORDER BY date ASC';
-    const sqlBlogQueryDESC = 'SELECT id, title, blog, date FROM blogs where userId = ? ORDER BY date DESC';
+    const sqlBlogQuery = 'SELECT id, title, blog, date FROM blogs where userId = ? ORDER BY date DESC';
     const values = [id];
     
     db.query(sqlUserQuery, user, (error, result) => {
@@ -352,44 +347,20 @@ app.get("/allblogs/:id", (req, res) => {
             })
         } else {
             const userName = `${result[0].first_name} ${result[0].surname}`;
-            console.log(userName)
 
-            if (ascending) {
-                db.query(sqlBlogQueryASC, values, (error, results) => {
-                    console.log('in ASC get')
-                    if (error) {
-                        console.log(error);
-                        res.redirect("error");
-                    } else {
-                        // console.log(results)
-                        res.render("allblogs", {
-                            id: id,
-                            userName: userName,
-                            blogs: results,
-                            ascending: ascending
-                        });
-                    }
-                });
-            } else {
-                db.query(sqlBlogQueryDESC, values, (error, results) => {
-                    console.log('in DESC get')
-                    // console.log(results)
-                    if (error) {
-                        console.log(error);
-                        res.redirect("error");
-                    } else {
-                        // console.log(results)
-                        res.render("allblogs", {
-                            id: id,
-                            userName: userName,
-                            blogs: results,
-                            ascending: ascending
-                        });
-                    }
-                });
-
-            }
-
+            db.query(sqlBlogQuery, values, (error, results) => {
+                if (error) {
+                    console.log(error);
+                    res.redirect("error");
+                } else {
+                    res.render("allblogs", {
+                        id: id,
+                        userName: userName,
+                        blogs: results,
+                        ascending: false
+                    });
+                }
+            });
         }
     });
 });
@@ -398,7 +369,7 @@ app.get("/allblogs/:id", (req, res) => {
 app.post("/allblogs/:id", (req, res) => {
     const id = req.params.id;
     const userName = req.body.userName;
-    const ascending = req.body.ascending == '' || req.body.ascending == 'false' ? true : false;
+    const ascending = req.body.ascending == 'false' ? true : false;
 
     console.log(`ascending in post ${ascending}`)
 
@@ -438,27 +409,6 @@ app.post("/allblogs/:id", (req, res) => {
         });
 
     }
-
-
-
-    // const sqlBlogQuery = 'SELECT title, blog, date FROM blogs where userId = ? ORDER BY date ASC';
-    // const user = [id];
-
-    // db.query(sqlBlogQuery, user, (error, results) => {
-
-    //     if (error) {
-    //         console.log(error);
-    //         res.redirect("error");
-    //     } else {
-    //         // console.log(results)
-            // res.render("allblogs", {
-            //     id: id,
-            //     userName: userName,
-            //     ascending: ascending
-
-        //     });
-        // }
-    // });
 
 });
 
