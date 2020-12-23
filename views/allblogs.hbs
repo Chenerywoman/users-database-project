@@ -13,7 +13,7 @@
     <div class="individual-blogs-container">
         {{#each blogs}}
             <div class="individual-blog">
-                <a href="">{{this.title}}</a>
+                <a href="/blog/{{this.id}}">{{this.title}}</a>
             </div>
         {{/each}}
     </div>
@@ -24,13 +24,13 @@
 
     <div class="bottom-element-container">
     {{#if userName}} 
-       <a class="back-to-profile" href="/profile/{{id}}">Back to {{userName}}'s profile</a>
+       <a class="back-to-profile" href="/profile/{{id}}">Profile</a>
     {{/if}}
      
         <form class="toggle" action="/allblogs/{{id}}" method="POST">
                 <input type="hidden" name="userName" value="{{userName}}">
                 <input type="hidden" name="ascending" value="{{ascending}}">
-                <button type="submit">{{#if ascending}}Descending{{else}}Ascending{{/if}}</button>
+                <button type="submit">{{#if ascending}}Earliest{{else}}Latest{{/if}}</button>
         </form>
        
     </div>
