@@ -375,6 +375,10 @@ app.post("/allblogs/:id", (req, res) => {
 
     const sqlBlogQueryASC = 'SELECT id, title, blog, date FROM blogs where userId = ? ORDER BY date ASC';
     const sqlBlogQueryDESC = 'SELECT id, title, blog, date FROM blogs where userId = ? ORDER BY date DESC';
+
+    const ascTest = 'ASC';
+    const sqlBlogTest  = `SELECT * FROM blogs where userId = ? ORDER BY date ${ascTest}`;
+   
     const values = [id];
 
     if (ascending) {
@@ -410,6 +414,47 @@ app.post("/allblogs/:id", (req, res) => {
 
     }
 
+});
+
+app.get("/blog/:id", (req, res) => {
+
+    const blogId  = req.params.id;
+
+    const sqlSingleBlogQuery = 'SELECT userId, title, blog, date FROM blogs WHERE id = ? ';
+    const values = [blogId];
+
+    const sqlUserQuery = 'SELECT first_name, surname FROM users where id = ?';
+
+    db.query(sqlSingleBlogQuery, values, (error, resultBlog) => {
+
+        if (error) {
+            console.log("error")
+            res.redirect("error")
+        } else {
+            const userId = [resultBlog[0].userId];
+       
+            db.query(sqlUserQuery, userId, (error, resultUser) => {
+                if (error) {
+                    console.log(error)
+                    res.redirect(error)
+                } else {
+                    const date = resultBlog[0].date.toString();
+                    const shortDate = date.substring(0, date.indexOf(" 00:00:00"))
+                    console.log(resultUser[0])
+                    res.render("blog", {
+                        title: resultBlog[0].title,
+                        blog: resultBlog[0].blog,
+                        userId: userId,
+                        firstName: resultUser[0].first_name, 
+                        surname: resultUser[0].surname, 
+                        date: shortDate
+                    });
+
+                }
+            });
+
+        }
+    })
 });
 
 app.get("/error", (req, res) => {

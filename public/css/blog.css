@@ -1,0 +1,36 @@
+body {
+    background-color: #EDF2F4;
+    color: #2B2D42;
+    text-align: center;
+    margin: 0;
+}
+
+h1 {
+    margin-top: 2em;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.blog-subheadings {
+    display: inline-block;
+    margin: 8em auto 0 auto;
+}
+
+.blog-author {
+    display: inline-block;
+}
+
+.individual-blog-date {
+    margin: 0 0 0 1em;
+    display: inline-block;
+}
+
+.back-to-individual-blogs{
+    display: block;
+    text-decoration: none;
+}
+
+.blog-body {
+    margin: 2em auto 2em auto;
+}
