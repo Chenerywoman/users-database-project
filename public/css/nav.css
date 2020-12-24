@@ -12,12 +12,12 @@ nav ul {
     padding: 1em, 0;
     padding-inline-start: 0;
     background-color: #8D99AE;
-    padding: 1em;
+    padding: 1em 1em 1em 0;
     margin:0;
 }
 
 nav ul li {
-    padding-left: 1rem;
+    padding-left: 1em;
 }
 
 nav ul li a{
@@ -33,4 +33,12 @@ nav ul li a:link {
 
 nav ul li a:visited{
     color: #EDF2F4;
+}
+
+@media only screen and (max-width: 300px) {
+
+    nav ul li {
+        padding-left: 0.5em;
+    }
+
 }
