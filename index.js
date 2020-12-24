@@ -233,7 +233,7 @@ app.get("/profile/:id", (req, res) => {
 
         if (error) {
             console.log(error)
-            res.redirect("error")
+            res.redirect("/error")
 
         } else {
 
@@ -271,7 +271,7 @@ app.get("/newblog/:id", (req, res) => {
         console.log(user)
         if (error) {
             console.log(error);
-            res.redirect("error")
+            res.redirect("/error")
         } else if (result.length < 1) {
             res.render("newblog", {
                 noId: true,
@@ -314,7 +314,7 @@ app.post("/newblog/:id", (req, res) => {
 
                 if (error){
                     console.log(error);
-                    res.redirect("error");
+                    res.redirect("/error");
                 } else {
                     res.render("newblog", {
                         submitted: true,
@@ -339,7 +339,7 @@ app.get("/allblogs/:id", (req, res) => {
     db.query(sqlUserQuery, user, (error, result) => {
         if (error) {
             console.log(error);
-            res.redirect("error")
+            res.redirect("/error")
         } else if (result.length < 1) {
             res.render("allblogs", {
                 noId: true,
@@ -351,7 +351,7 @@ app.get("/allblogs/:id", (req, res) => {
             db.query(sqlBlogQuery, values, (error, results) => {
                 if (error) {
                     console.log(error);
-                    res.redirect("error");
+                    res.redirect("/error");
                 } else {
                     res.render("allblogs", {
                         id: id,
@@ -380,7 +380,7 @@ app.post("/allblogs/:id", (req, res) => {
      
         if (error) {
             console.log(error);
-            res.redirect("error");
+            res.redirect("/error");
         } else {
             res.render("allblogs", {
                 id: id,
@@ -407,14 +407,14 @@ app.get("/blog/:id", (req, res) => {
 
         if (error) {
             console.log("error")
-            res.redirect("error")
+            res.redirect("/error")
         } else {
             const userId = [resultBlog[0].userId];
        
             db.query(sqlUserQuery, userId, (error, resultUser) => {
                 if (error) {
                     console.log(error)
-                    res.redirect(error)
+                    res.redirect("/error")
                 } else {
                     const date = resultBlog[0].date.toString();
                     const shortDate = date.substring(0, date.indexOf(" 00:00:00"))
@@ -433,6 +433,46 @@ app.get("/blog/:id", (req, res) => {
 
         }
     })
+});
+
+app.get("/allBlogs", (req, res) => {
+
+    const sqlAllBlogsQuery = 'SELECT * FROM blogs ORDER BY date DESC';
+
+    db.query(sqlAllBlogsQuery, (error, results) => {
+        if (error){
+            console.log(error);
+            res.redirect("/error")
+        } else {
+            res.render("allblogs", {
+                blogs: results,
+                ascending: false
+            });
+        }
+    })
+
+});
+
+app.post("/allBlogs", (req, res) => {
+   
+    let ascending = req.body.ascending == 'false' ? true : false;
+    let order = ascending ? 'ASC' : 'DESC';
+
+    const sqlBlogQuery = `SELECT * FROM blogs ORDER BY date ${order}`;
+    
+    db.query(sqlBlogQuery, (error, results) => {
+     
+        if (error) {
+            console.log(error);
+            res.redirect("/error");
+        } else {
+            res.render("allblogs", {
+                blogs: results,
+                ascending: ascending
+            });
+        }
+    });
+
 });
 
 app.get("/error", (req, res) => {
