@@ -9,7 +9,6 @@ nav ul {
     list-style-type: none;
     display: flex;
     justify-content: flex-start;
-    padding: 1em, 0;
     padding-inline-start: 0;
     background-color: #8D99AE;
     padding: 1em 1em 1em 0;
