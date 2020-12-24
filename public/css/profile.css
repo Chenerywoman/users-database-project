@@ -15,6 +15,25 @@ h2 {
     color: #D90429;
 }
 
+.profile-div{
+    margin: 1em auto 1em auto;
+    width: 80%;
+    background-color: pink;
+}
+
+.email {
+    background-color:white;
+}
+
+.label{
+    display: inline-block;
+}
+
+.content{
+    display: inline; 
+    word-wrap: break-word;
+}
+
 form {
     display: inline-block;
 }
@@ -39,7 +58,7 @@ form {
     color: #EDF2F4;
 }
 
-.profile-table {
+/* .profile-table {
     margin: 1em auto 1em auto;
     border-collapse: collapse;
     table-layout: fixed;
@@ -63,5 +82,5 @@ form {
     width: 80%;
     border: 1px solid #2B2D42;
     overflow: auto;
-}
+} */
 
