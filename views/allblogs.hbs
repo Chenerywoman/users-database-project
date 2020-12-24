@@ -8,21 +8,14 @@
 </head>
 <body>
     {{>Nav}}
+ <div class="top-element-container">
     <h1>All Blogs {{#if userName}}for {{userName}}{{/if}}</h1>
-
-    <div class="individual-blogs-container">
-        {{#each blogs}}
-            <div class="individual-blog">
-                <a href="/blog/{{this.id}}">{{this.title}}</a>
-            </div>
-        {{/each}}
-    </div>
     
     {{#if noId}}
         <p>No user with id {{id}} found.</p>
     {{/if}}
 
-    <div class="bottom-element-container">
+    
     {{#if userName}} 
        <a class="back-to-profile" href="/profile/{{id}}">Profile</a>
 
@@ -40,7 +33,23 @@
                 <button class="ascending" type="submit">{{#if ascending}}Latest{{else}}Earliest{{/if}}</button>
         </form>
 
+        <h4>Search by title keyword</h4>
+         <form class="keyword" action="/blogs" method="GET
+         ">
+            <input  type="text" name="keyword">
+            <button class="find-by-keyword" type="submit">Find</button>
+        </form>
+
      {{/if}}
     </div>
+
+     <div class="individual-blogs-container">
+        {{#each blogs}}
+            <div class="individual-blog">
+                <a href="/blog/{{this.id}}">{{this.title}}</a>
+            </div>
+        {{/each}}
+    </div>
+
 </body>
 </html>
