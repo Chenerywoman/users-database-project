@@ -435,7 +435,7 @@ app.get("/blog/:id", (req, res) => {
     })
 });
 
-app.get("/allBlogs", (req, res) => {
+app.get("/allblogs", (req, res) => {
 
     const sqlAllBlogsQuery = 'SELECT * FROM blogs ORDER BY date DESC';
 
@@ -444,6 +444,7 @@ app.get("/allBlogs", (req, res) => {
             console.log(error);
             res.redirect("/error")
         } else {
+
             res.render("allblogs", {
                 blogs: results,
                 ascending: false
@@ -453,7 +454,7 @@ app.get("/allBlogs", (req, res) => {
 
 });
 
-app.post("/allBlogs", (req, res) => {
+app.post("/allblogs", (req, res) => {
    
     let ascending = req.body.ascending == 'false' ? true : false;
     let order = ascending ? 'ASC' : 'DESC';
@@ -477,24 +478,51 @@ app.post("/allBlogs", (req, res) => {
 
 app.get("/blogs", (req, res) => {
     let keyword = req.query.keyword;
+    let author = req.query.author;
 
     const sqlSearchQuery = `select * from blogs where title LIKE '%${keyword}%'`
     const searchTerm = [keyword];
 
-    db.query(sqlSearchQuery, searchTerm,(error, results) => {
-        if (error) {
-            console.log(error);
-            res.redirect("/error")
-        } else {
-            console.log(results)
-            res.render("blogs", {
-                keyword: keyword,
-                blogs: results
-            })
-        }
-    });
+    let sqlAuthorQuery = `SELECT id, first_name, surname FROM users WHERE first_name LIKE '%${author}%' OR surname LIKE '%${author}%'`;
 
+    if (keyword) {
+
+        db.query(sqlSearchQuery, searchTerm,(error, keywordResults) => {
+            if (error) {
+                console.log(error);
+                res.redirect("/error")
+            } else if (keywordResults.length < 1) {
+                res.render("blogs", {
+                    keyword: keyword,
+                    blogs: null
+                })
+                
+            } else {
+                res.render("blogs", {
+                    keyword: keyword,
+                    blogs: keywordResults
+                })
+            }
+        });
+
+    } else {
+
+        db.query(sqlAuthorQuery, (error, authorResults) => {
+            if (error) {
+                console.log(error);
+                res.redirect("/error")
+            } else {
+                console.log(authorResults)
+                res.render("blogs", {
+                    searchTerm: author,
+                    authors: authorResults
+                });
+            }
+        });
+    }
 });
+     
+    
 
 app.get("/error", (req, res) => {
     res.render("error")
