@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/blogs.css">
+    <title>{{keyword}}</title>
+</head>
+<body>
+    {{>Nav}}
+    <h1>Blogs with title keyword: {{keyword}}</h1>
+   
+    <div class="keyword-blogs-container"></div>
+    {{#each blogs}}
+          <div class="keyword-blog">
+                <a href="/blog/{{this.id}}">{{this.title}}</a>
+        </div>
+    {{/each}}
+    </div>
+    
+</body>
+</html>

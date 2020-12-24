@@ -475,6 +475,27 @@ app.post("/allBlogs", (req, res) => {
 
 });
 
+app.get("/blogs", (req, res) => {
+    let keyword = req.query.keyword;
+
+    const sqlSearchQuery = `select * from blogs where title LIKE '%${keyword}%'`
+    const searchTerm = [keyword];
+
+    db.query(sqlSearchQuery, searchTerm,(error, results) => {
+        if (error) {
+            console.log(error);
+            res.redirect("/error")
+        } else {
+            console.log(results)
+            res.render("blogs", {
+                keyword: keyword,
+                blogs: results
+            })
+        }
+    });
+
+});
+
 app.get("/error", (req, res) => {
     res.render("error")
 });
