@@ -22,7 +22,10 @@
         <input type="text" name="password" value={{password}}>
         <button type="submit">Update</button>
     </form>
+
+      <a class="back-to-profile" href="/profile/{{id}}">Profile</a> 
     {{/if}}
+
 
     {{#if name}}
         <p>User {{name}} {{secondname}} has been updated.</p>
