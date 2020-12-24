@@ -369,52 +369,30 @@ app.get("/allblogs/:id", (req, res) => {
 app.post("/allblogs/:id", (req, res) => {
     const id = req.params.id;
     const userName = req.body.userName;
-    const ascending = req.body.ascending == 'false' ? true : false;
+    let ascending = req.body.ascending == 'false' ? true : false;
+    let order = ascending ? 'ASC' : 'DESC';
 
-    console.log(`ascending in post ${ascending}`)
+    const sqlBlogQuery = `SELECT * FROM blogs where userId = ? ORDER BY date ${order}`;
 
-    const sqlBlogQueryASC = 'SELECT id, title, blog, date FROM blogs where userId = ? ORDER BY date ASC';
-    const sqlBlogQueryDESC = 'SELECT id, title, blog, date FROM blogs where userId = ? ORDER BY date DESC';
-
-    const ascTest = 'ASC';
-    const sqlBlogTest  = `SELECT * FROM blogs where userId = ? ORDER BY date ${ascTest}`;
-   
     const values = [id];
 
-    if (ascending) {
-        db.query(sqlBlogQueryASC, values, (error, results) => {
-            console.log('in ASC post')
-            if (error) {
-                console.log(error);
-                res.redirect("error");
-            } else {
-                res.render("allblogs", {
-                    id: id,
-                    userName: userName,
-                    blogs: results,
-                    ascending: ascending
-                });
-            }
-        });
-    } else {
-        db.query(sqlBlogQueryDESC, values, (error, results) => {
-            console.log('in DESC post')
-            if (error) {
-                console.log(error);
-                res.redirect("error");
-            } else {
-                res.render("allblogs", {
-                    id: id,
-                    userName: userName,
-                    blogs: results,
-                    ascending: ascending
-                });
-            }
-        });
-
-    }
+    db.query(sqlBlogQuery, values, (error, results) => {
+     
+        if (error) {
+            console.log(error);
+            res.redirect("error");
+        } else {
+            res.render("allblogs", {
+                id: id,
+                userName: userName,
+                blogs: results,
+                ascending: ascending
+            });
+        }
+    });
 
 });
+
 
 app.get("/blog/:id", (req, res) => {
 
