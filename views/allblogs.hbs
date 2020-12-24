@@ -30,7 +30,7 @@
         <form class="toggle" action="/allblogs/{{id}}" method="POST">
                 <input type="hidden" name="userName" value="{{userName}}">
                 <input type="hidden" name="ascending" value="{{ascending}}">
-                <button type="submit">{{#if ascending}}Earliest{{else}}Latest{{/if}}</button>
+                <button class="ascending" type="submit">{{#if ascending}}Earliest{{else}}Latest{{/if}}</button>
         </form>
        
     </div>
