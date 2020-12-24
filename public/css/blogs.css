@@ -12,7 +12,7 @@ h1 {
     width: 100%;
 }
 
-.keyword-blogs-container {
+.keyword-blogs-container, .authors-container {
     margin: 8em 0 2em 0;
 }
 
@@ -31,3 +31,20 @@ h1 {
 .keyword-blog a:visited{
     color: #8D99AE
 }
+
+.keyword-not-found {
+    margin: 8em 0 2em 0;
+}
+
+.author-link a{
+    text-decoration: none;
+}
+
+.author-link a:link{
+    color: #D90429
+}
+
+.author-link a:visited{
+    color: #8D99AE
+}
+
