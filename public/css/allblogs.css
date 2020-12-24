@@ -25,12 +25,20 @@ h1 {
     text-decoration: none;
 }
 
+.individual-blog a:link{
+    color: #D90429
+}
+
+.individual-blog a:visited{
+    color: #8D99AE
+}
+
 .back-to-profile{
     text-decoration: none;
     background-color: #D90429;
     border-radius: 5%;
     padding: 0.5em;
-    margin: 0 auto 0 auto;
+    margin: 0 1em 0 auto;
 }
 
 .back-to-profile:link {
@@ -45,4 +53,15 @@ h1 {
     position: fixed;
     bottom: 1em;
     width: 100%;
+}
+
+.toggle {
+    display: inline-block;
+}
+
+.ascending {
+    background-color:#8D99AE;
+    border-radius: 5%;
+    padding: 0.5em;
+    margin: 0 auto 0 1em;
 }
