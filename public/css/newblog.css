@@ -23,7 +23,7 @@ h1 {
     background-color: #8D99AE
 }
 
-input {
+input, textarea {
     width: 300px;
 }
 
