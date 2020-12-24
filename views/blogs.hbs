@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/blogs.css">
-    <title>{{keyword}}</title>
+    <title>{{#if keyword}} {{keyword}} {{else}} authors {{/if}}</title>
 </head>
 <body>
     {{>Nav}}
+
+    {{#if keyword}}
     <h1>Blogs with title keyword: {{keyword}}</h1>
    
+    {{#if blogs}}
     <div class="keyword-blogs-container"></div>
     {{#each blogs}}
           <div class="keyword-blog">
@@ -17,6 +20,32 @@
         </div>
     {{/each}}
     </div>
+    {{else}}
+        <p class="keyword-not-found">No blogs with keyword {{keyword}} found.</p>
+    {{/if}}
+
+    {{else}}
+
+      <h1>Authors: {{searchTerm}}</h1>
+
+    <div class="authors-container"></div>
+
+        {{#if authors}}
+            <p class="choose-author">Click on the individual author to see a list of their blogs.</p>
+        
+            {{#each authors}}
+                <div class="author-link">
+                    <a href="/allblogs/{{this.id}}">{{this.first_name}} {{this.surname}}</a>
+                </div>
+            {{/each}}
+
+        {{else}}
+            <p class="no-author">Cannot find an author with either a first name or surname of {{searchTerm}}.</p>
+
+        {{/if}}
+    </div>
+
+    {{/if}}
     
 </body>
 </html>
