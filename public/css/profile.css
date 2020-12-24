@@ -18,11 +18,6 @@ h2 {
 .profile-div{
     margin: 1em auto 1em auto;
     width: 80%;
-    background-color: pink;
-}
-
-.email {
-    background-color:white;
 }
 
 .label{
@@ -58,29 +53,4 @@ form {
     color: #EDF2F4;
 }
 
-/* .profile-table {
-    margin: 1em auto 1em auto;
-    border-collapse: collapse;
-    table-layout: fixed;
-    width: 30%;
-}
-
-.profile-table td {
-    text-align: left;
-}
-
-.profile-table tr td:nth-child(odd){
-    color: #EDF2F4;
-    background-color: #EF233C;
-    width: 20%;
-    border: 1px solid #2B2D42;
-    overflow: auto;
-}
-
-.profile-table tr td:nth-child(even){
-    background-color: #EDF2F4;
-    width: 80%;
-    border: 1px solid #2B2D42;
-    overflow: auto;
-} */
 
