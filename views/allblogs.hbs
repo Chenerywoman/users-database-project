@@ -35,19 +35,21 @@
                 <button class="ascending" type="submit">{{#if ascending}}Latest{{else}}Earliest{{/if}}</button>
         </form>
     
-        <h4 class="keyword-heading">Search by title keyword</h4>
+        <div class="search-container">
          <form class="keyword" action="/blogs" method="GET
          ">
+            <label for="keyword">Search by title keyword</label>
             <input  type="text" name="keyword">
             <button class="find-by-keyword" type="submit">Find</button>
         </form>
     
-          <h4 class="author-heading">Search by author surname OR first name</h4>
          <form class="author" action="/blogs" method="GET
          ">
+            <label for="author">Search by author surname OR first name</label>
             <input  type="text" name="author">
             <button class="find-by-author" type="submit">Find</button>
         </form>
+        </div>
 
      {{/if}}
     </div>

@@ -8,32 +8,21 @@ body {
 .top-element-container{
     position: fixed;
     top: 0;
-    margin-top: 3em; 
+    margin-top: 1.75em; 
     width: 100%;
 }
 
 h1 {
     width: 100%;
-}
-
-.back-to-profile{
-    text-decoration: none;
-    background-color: #D90429;
-    border-radius: 5%;
-    padding: 0.5em;
-    margin: 0 1em 0 auto;
-}
-
-.back-to-profile:link {
-    color: #2B2D42;
-}
-
-.back-to-profile:visited{
-    color: #EDF2F4;
+    background-color: #EDF2F4;
+    padding: 0.5em 0 0.5em 0;
+    margin-bottom:0;
 }
 
 .toggle {
-    display: inline-block;
+    background-color:#EDF2F4; 
+    margin: 0;
+    padding-bottom: 1em;
 }
 
 .ascending {
@@ -42,17 +31,24 @@ h1 {
     padding: 0.5em;
     margin: 0 auto 0 1em;
 }
+.search-container{
+    background-color:#EDF2F4; 
+    padding-bottom: 1em;
+}
 
 .keyword{
-    display: inline
+    display: inline;
+    margin: 0 1em 0 0;
 }
 
 .author {
-    display: inline
+    display: inline;
 }
 
-.author-heading, .keyword-heading{
-    display: inline
+.find-by-keyword, .find-by-author {
+    background-color: #D90429;
+    color: #2B2D42;
+    border-radius: 5%;
 }
 
 .noBlogs{
@@ -61,7 +57,7 @@ h1 {
 }
 
 .individual-blogs-container{
-    margin-top: 11em;
+    margin-top: 13em;
     margin-bottom: 4em;
 }
 
@@ -80,3 +76,76 @@ h1 {
 .individual-blog a:visited{
     color: #8D99AE
 }
+
+/* IPads (portrait) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+    
+    .keyword{
+        display: block;
+        margin: 0 0 0.5em 0;
+    
+    }
+
+    .keyword label{
+        display: block;
+    }
+    
+    .author {
+        display: block;
+    }
+
+    .author label {
+        display:block;
+    }
+
+}
+
+/* smalll tablet (landscape) ----------- */
+@media only screen and (min-device-width : 540px) and (max-device-width : 720px) and (orientation : landscape) {
+
+    .keyword{
+        display: block;
+        margin: 0 0 0.5em 0;
+    
+    }
+
+    .keyword label{
+        display: block;
+    }
+    
+    .author {
+        display: block;
+    }
+
+    .author label {
+        display:block;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+    .keyword{
+        display: block;
+        margin: 0 0 0.5em 0;
+    
+    }
+
+    .keyword label{
+        display: block;
+    }
+    
+    .author {
+        display: block;
+    }
+
+    .author label {
+        display:block;
+    }
+
+}
+
+
+
+   
+    
+ 
