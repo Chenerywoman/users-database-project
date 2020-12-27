@@ -16,14 +16,17 @@
     {{/if}}
 
     
-    {{#if userName}} 
-       <a class="back-to-profile" href="/profile/{{id}}">Profile</a>
+    {{#if individualBlogs}} 
 
         <form class="toggle" action="/allblogs/{{id}}" method="POST">
             <input type="hidden" name="userName" value="{{userName}}">
             <input type="hidden" name="ascending" value="{{ascending}}">
             <button class="ascending" type="submit">{{#if ascending}}Latest{{else}}Earliest{{/if}}</button>
         </form>
+
+     {{else if noBlogs}}
+
+        <p class="noBlogs">No blogs found for {{userName}}</p>
 
     {{else}}
 
@@ -48,6 +51,8 @@
 
      {{/if}}
     </div>
+
+   
 
      <div class="individual-blogs-container">
         {{#each blogs}}

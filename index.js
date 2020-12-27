@@ -362,8 +362,16 @@ app.get("/allblogs/:id", (req, res) => {
                 if (error) {
                     console.log(error);
                     res.redirect("/error");
+                } else if (results.length < 1){
+                    res.render("allblogs", {
+                        id: id,
+                        userName: userName,
+                        noBlogs: true,
+                        ascending: false
+                    });
                 } else {
                     res.render("allblogs", {
+                        individualBlogs: true, 
                         id: id,
                         userName: userName,
                         blogs: results,
