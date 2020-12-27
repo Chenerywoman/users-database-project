@@ -7,16 +7,12 @@
     <title>Blog</title>
 </head>
 <body>
-    {{>Nav parameter=userId}}
+    {{>Nav}}
     <h1>{{title}}</h1>
     <div class="blog-subheadings"></div>
         <h3 class="blog-author">{{firstName}} {{surname}}</h3>
         <h4 class="individual-blog-date">{{date}}</h4>
     </div>
-    <br>
-        <a class="back-to-individual-blogs" href="/allblogs/{{userId}}">All {{firstName}} {{surname}}'s blogs</a> 
-        <a class="back-to-allblogs" href="/allblogs">All blogs</a> 
-         <a class="back-to-profile" href="/profile/{{userId}}">Profile</a> 
 
     <p class="blog-body">{{blog}}</p>
 
