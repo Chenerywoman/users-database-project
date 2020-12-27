@@ -19,10 +19,12 @@
 
     {{#if existingBlogs}}
 
-        <p>Cannot delete {{userName}} with id {{id}} without deleting the user's blogs first.</p>
+        <p>Cannot delete {{userName}} with id {{id}} without deleting {{userName}}'s blogs first.</p>
 
-        <a class="blogs-link"href="/allblogs/{{id}}">Go to Blogs</a>
-
+        <form action="/deleteblogs/{{id}}" method="POST">
+             <input type="hidden" name="userName" value='{{userName}}'>
+            <button class="delete-blogs-link" type="submit">Delete Blogs</button>
+        </form>
     {{/if}}
 </body>
 </html>

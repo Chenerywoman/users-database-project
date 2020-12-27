@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/deleteblogs.css">
+    <title>DeleteBlogs</title>
+</head>
+<body>
+    {{>Nav}}
+    <h1>All {{userName}}'s Blogs Deleted</h1>
+    <p>You can now delete {{userName}}.</p>
+      <form class="delete" action="/delete/{{id}}" method="POST">
+            <input class="user-to-delete" type="hidden" name="userName" value="{{userName}}">
+            <button class="delete-user" type="submit">Delete</button>
+    </form>
+
+</body>
+</html>

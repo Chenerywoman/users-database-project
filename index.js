@@ -235,8 +235,26 @@ app.post("/delete/:id", (req, res) => {
                     }
                 });
             }
-        // }
 
+    });
+});
+
+app.post("/deleteblogs/:id", (req, res) => {
+    const id = req.params.id;
+    const userName = req.body.userName;
+    const sqlDeleteBlogs = "DELETE FROM blogs where userId = ?";
+    const user = [id];
+
+    db.query(sqlDeleteBlogs, user, (error, result) => {
+        if (error) {
+            console.log(error)
+            res.render("error")
+        } else {
+            res.render("deleteblogs", {
+                userName:userName, 
+                id:id
+            })
+        }
     });
 });
 
