@@ -198,26 +198,34 @@ app.post("/delete/:id", (req, res) => {
         if (error) {
             console.log(error)
             res.render("error", {
-                message: `unable to find user ${userName} with id ${id} to delete.`
+                message: `Cannot delete ${userName} with id ${id}.`
             });
-        } else {
 
-            if (results.length < 1) {
+        }  else if (results.length < 1) {
                 res.render("delete", {
                     alreadyDeleted: true,
                     id: id,
                     userName: userName
                 });
-            } else {
+        } else {
 
                 const fullName = `${results[0].first_name}  ${results[0].surname}`;
 
                 db.query(sqlDeleteQuery, user, (error, results) => {
                     if (error) {
                         console.log(error)
-                        res.render("error", {
-                            message: `unable to delete user ${fullName} with id: ${id}.`
-                        })
+                        if (error.errno == 1451) {
+                            res.render("delete", {
+                                existingBlogs: true,
+                                id: id,
+                                userName: userName
+                            });
+            
+                        } else {
+                            res.render("error", {
+                                message: `Cannot delete ${userName} with id ${id}.`
+                            });
+                        }
 
                     } else {
                         res.render("delete", {
@@ -227,7 +235,7 @@ app.post("/delete/:id", (req, res) => {
                     }
                 });
             }
-        }
+        // }
 
     });
 });
@@ -399,6 +407,7 @@ app.post("/allblogs/:id", (req, res) => {
         } else {
             res.render("allblogs", {
                 id: id,
+                individualBlogs: true, 
                 userName: userName,
                 blogs: results,
                 ascending: ascending
