@@ -45,5 +45,17 @@ footer ul li a:visited{
         font-size: 1em;
     }
 
+}
+
+@media only screen and (max-width: 300px) {
+
+    footer ul li {
+        padding-left: 0.25em;
+    }
+
+     footer ul li a{
+        padding: 0.25em;
+        font-size: 0.75em;
+    }
 
 }

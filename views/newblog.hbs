@@ -15,14 +15,19 @@
         <p class="no-id-blog">Unable to upload a blog: no user with id {{id}} found in the database.</p>
 
     {{else}}
-          <form class="generate-blog" action="/newblog/{{id}}" method="POST">
-        <label for="title">title</label>
-        <input class="title" type="text" name="title"><br>
-        <label for="blog">blog</label>
-        <textarea rows="10" cols="35" name="blog"></textarea><br>
-        <input type="hidden" name="userName" value='{{userName}}'>
-        <br>
-        <button type="submit">Create</button>
+
+        <form class="generate-blog" action="/newblog/{{id}}" method="POST">
+            <div class="row">
+                <label for="title">title</label>
+                <input class="title" type="text" name="title"><br>
+            </div>
+            <div class="row">
+                <label for="blog">blog</label>
+                <textarea class="blog" rows="10" cols="35" name="blog"></textarea><br>
+                <input type="hidden" name="userName" value='{{userName}}'>
+            </div>
+                <label for="submit"></label>
+                <button class="create" type="submit">Create</button>
         </form>
 
     {{/if}}
