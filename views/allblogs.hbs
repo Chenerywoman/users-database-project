@@ -34,14 +34,14 @@
                 <input type="hidden" name="ascending" value="{{ascending}}">
                 <button class="ascending" type="submit">{{#if ascending}}Latest{{else}}Earliest{{/if}}</button>
         </form>
-   
+    
         <h4 class="keyword-heading">Search by title keyword</h4>
          <form class="keyword" action="/blogs" method="GET
          ">
             <input  type="text" name="keyword">
             <button class="find-by-keyword" type="submit">Find</button>
         </form>
-
+    
           <h4 class="author-heading">Search by author surname OR first name</h4>
          <form class="author" action="/blogs" method="GET
          ">
@@ -52,13 +52,11 @@
      {{/if}}
     </div>
 
-   
-
      <div class="individual-blogs-container">
         {{#each blogs}}
-            <div class="individual-blog">
-                <a href="/blog/{{this.id}}">{{this.title}}</a>
-            </div>
+        <div class="individual-blog">
+            <a href="/blog/{{this.id}}">{{this.title}}</a> 
+        </div>
         {{/each}}
     </div>
 
