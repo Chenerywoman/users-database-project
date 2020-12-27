@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/userblogs.css">
+    <title>Blogs</title>
+</head>
+<body>
+    {{>Nav}}
+ <div class="top-element-container">
+    <h1>All Blogs for {{userName}}</h1>
+    
+    {{#if noId}}
+        <p>No user with id {{id}} found.</p>
+    {{/if}}
+
+    {{#if individualBlogs}} 
+
+        <form class="toggle" action="/userblogs/{{id}}" method="POST">
+            <input type="hidden" name="userName" value="{{userName}}">
+            <input type="hidden" name="ascending" value="{{ascending}}">
+            <button class="ascending" type="submit">{{#if ascending}}Latest{{else}}Earliest{{/if}}</button>
+        </form>
+
+     {{else if noBlogs}}
+
+        <p class="noBlogs">No blogs found for {{userName}}</p>
+
+     {{/if}}
+    </div>
+
+     <div class="individual-blogs-container">
+        {{#each blogs}}
+        <div class="individual-blog">
+            <a href="/blog/{{this.id}}">{{this.title}}</a> 
+        </div>
+        {{/each}}
+    </div>
+   
+         {{>footer  userId=id}}
+
+</body>
+</html>

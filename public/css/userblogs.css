@@ -31,25 +31,6 @@ h1 {
     padding: 0.5em;
     margin: 0 auto 0 1em;
 }
-.search-container{
-    background-color:#EDF2F4; 
-    padding-bottom: 0.5em;
-}
-
-.keyword{
-    display: inline;
-    margin: 0 1em 0 0;
-}
-
-.author {
-    display: inline;
-}
-
-.find-by-keyword, .find-by-author {
-    background-color: #D90429;
-    color: #2B2D42;
-    border-radius: 5%;
-}
 
 .noBlogs{
     margin-top: 2em;
@@ -57,7 +38,7 @@ h1 {
 }
 
 .individual-blogs-container{
-    margin-top: 13em;
+    margin-top: 11em;
     margin-bottom: 4em;
 }
 
@@ -128,33 +109,16 @@ h1 {
         font-size: 1.5em;
     }
 
-    .keyword{
-        display: block;
-        margin: 0 0 0.5em 0;
-    
-    }
-
-    .keyword label{
-        display: block;
-    }
-    
-    .author {
-        display: block;
-    }
-
-    .author label {
-        display:block;
-    }
-
     .individual-blogs-container{
-        margin-top: 15em;
-
+        margin-top: 9em; 
     }
 
 }
 
+@media only screen and (max-width: 300px) {
 
+    .individual-blogs-container{
+        margin-top: 12em;
+    }
 
-   
-    
- 
+}

@@ -34,7 +34,7 @@ nav ul li a:visited{
     color: #EDF2F4;
 }
 
-@media only screen and (max-width: 300px) {
+@media only screen and (max-width: 350px) {
 
     nav ul li {
         padding-left: 0.5em;

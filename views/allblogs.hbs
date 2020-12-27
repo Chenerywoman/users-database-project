@@ -9,33 +9,14 @@
 <body>
     {{>Nav}}
  <div class="top-element-container">
-    <h1>All Blogs {{#if userName}}for {{userName}}{{/if}}</h1>
+    <h1>All Blogs</h1>
     
-    {{#if noId}}
-        <p>No user with id {{id}} found.</p>
-    {{/if}}
-
-    
-    {{#if individualBlogs}} 
-
-        <form class="toggle" action="/allblogs/{{id}}" method="POST">
-            <input type="hidden" name="userName" value="{{userName}}">
+    <form class="toggle" action="/allblogs" method="POST">
             <input type="hidden" name="ascending" value="{{ascending}}">
             <button class="ascending" type="submit">{{#if ascending}}Latest{{else}}Earliest{{/if}}</button>
-        </form>
-
-     {{else if noBlogs}}
-
-        <p class="noBlogs">No blogs found for {{userName}}</p>
-
-    {{else}}
-
-        <form class="toggle" action="/allblogs" method="POST">
-                <input type="hidden" name="ascending" value="{{ascending}}">
-                <button class="ascending" type="submit">{{#if ascending}}Latest{{else}}Earliest{{/if}}</button>
-        </form>
+    </form>
     
-        <div class="search-container">
+    <div class="search-container">
          <form class="keyword" action="/blogs" method="GET
          ">
             <label for="keyword">Search by title keyword</label>
@@ -51,7 +32,6 @@
         </form>
         </div>
 
-     {{/if}}
     </div>
 
      <div class="individual-blogs-container">
@@ -61,10 +41,6 @@
         </div>
         {{/each}}
     </div>
-
-    {{#if userName}} 
-         {{>footer  userId=id firstname=userName}}
-    {{/if}} 
 
 </body>
 </html>

@@ -359,7 +359,7 @@ app.post("/newblog/:id", (req, res) => {
             });
 });
 
-app.get("/allblogs/:id", (req, res) => {
+app.get("/userblogs/:id", (req, res) => {
 
     const id = req.params.id;
 
@@ -374,7 +374,7 @@ app.get("/allblogs/:id", (req, res) => {
             console.log(error);
             res.redirect("/error")
         } else if (result.length < 1) {
-            res.render("allblogs", {
+            res.render("userblogs", {
                 noId: true,
                 id: id,
             })
@@ -386,14 +386,14 @@ app.get("/allblogs/:id", (req, res) => {
                     console.log(error);
                     res.redirect("/error");
                 } else if (results.length < 1){
-                    res.render("allblogs", {
+                    res.render("userblogs", {
                         id: id,
                         userName: userName,
                         noBlogs: true,
                         ascending: false
                     });
                 } else {
-                    res.render("allblogs", {
+                    res.render("userblogs", {
                         individualBlogs: true, 
                         id: id,
                         userName: userName,
@@ -407,7 +407,7 @@ app.get("/allblogs/:id", (req, res) => {
 });
 
 
-app.post("/allblogs/:id", (req, res) => {
+app.post("/userblogs/:id", (req, res) => {
     const id = req.params.id;
     const userName = req.body.userName;
     let ascending = req.body.ascending == 'false' ? true : false;
@@ -423,7 +423,7 @@ app.post("/allblogs/:id", (req, res) => {
             console.log(error);
             res.redirect("/error");
         } else {
-            res.render("allblogs", {
+            res.render("userblogs", {
                 id: id,
                 individualBlogs: true, 
                 userName: userName,
