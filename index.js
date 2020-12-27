@@ -86,7 +86,10 @@ app.post("/register", (req, res) => {
                         });
 
                     } else {
+                        console.log("result in register")
+                        console.log(result)
                         res.render("register", {
+                            id:result.insertId,
                             firstNameRegistered: first_name,
                             surnameRegistered: surname
                         });
