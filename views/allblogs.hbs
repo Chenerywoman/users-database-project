@@ -28,7 +28,6 @@
     {{else}}
 
         <form class="toggle" action="/allblogs" method="POST">
-                {{!-- <input type="hidden" name="userName" value="{{userName}}"> --}}
                 <input type="hidden" name="ascending" value="{{ascending}}">
                 <button class="ascending" type="submit">{{#if ascending}}Latest{{else}}Earliest{{/if}}</button>
         </form>
@@ -57,6 +56,10 @@
             </div>
         {{/each}}
     </div>
+
+    {{#if userName}} 
+         {{>footer  userId=id firstname=userName}}
+    {{/if}} 
 
 </body>
 </html>

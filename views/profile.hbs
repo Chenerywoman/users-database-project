@@ -29,10 +29,10 @@
         <h2>Blog Posts</h2>
         <p>Click on the buttons to access {{firstName}} {{surname}}'s posts or create a new post.</p>
         <div class="blog-buttons">
-            <form class="new-blog" action="/newblog/{{this.id}}" method="GET">
+            <form class="new-blog" action="/newblog/{{id}}" method="GET">
                     <button type="submit">New</button>
             </form>
-            <form class="all-blogs" action="/allblogs/{{this.id}}" method="GET">
+            <form class="all-blogs" action="/allblogs/{{id}}" method="GET">
                     <button type="submit">Blogs</button>
             </form>
         </div>
@@ -40,6 +40,8 @@
         <p>No profile found for user with id {{id}}</p>
         
     {{/if}}
+
+    {{>footer  userId=id firstname=firstName surname=surname}}
 
 </body>
 </html>

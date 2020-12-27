@@ -116,6 +116,7 @@ app.get("/update/:id", (req, res) => {
             let userDetails = results[0];
 
             res.render("update", {
+                toUpdate: true,
                 first_name: userDetails.first_name,
                 surname: userDetails.surname,
                 email: userDetails.email,
@@ -149,7 +150,10 @@ app.post("/update/:id", (req, res) => {
         } else {
             if ((result.length > 0) && (result[0].id != id)) {
                 res.render("update", {
-                    existingEmail: email
+                    existingEmail: email,
+                    first_name: first_name,
+                    surname: surname,
+                    id: id
                 });
 
             } else {
@@ -159,15 +163,18 @@ app.post("/update/:id", (req, res) => {
                         console.log(error)
                         res.render("update", {
                             notUpdated: id,
-                            firstName: first_name, 
-                            surname: surname
+                            first_name: first_name, 
+                            surname: surname,
+                            id: id
                         })
 
                     } else {
                        
                         res.render("update", {
-                            name: first_name,
-                            secondname: surname
+                            updated: true,
+                            first_name: first_name,
+                            surname: surname,
+                            id: id
                         });
                     }
                 })
@@ -188,6 +195,7 @@ app.post("/delete/:id", (req, res) => {
     db.query(sqlSelectQuery, user, (error, results) => {
 
         if (error) {
+            console.log(error)
             res.render("error", {
                 message: `unable to find user ${userName} with id ${id} to delete.`
             });
@@ -205,6 +213,8 @@ app.post("/delete/:id", (req, res) => {
 
                 db.query(sqlDeleteQuery, user, (error, results) => {
                     if (error) {
+                        console.log("in second if")
+                        console.log(error)
                         res.render("error", {
                             message: `unable to delete user ${fullName} with id: ${id}.`
                         })

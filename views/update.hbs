@@ -10,7 +10,7 @@
     {{>Nav}}
     <h1>Update User</h1>
    
-   {{#if first_name}}
+   {{#if toUpdate}}
     <form class="update" action="/update/{{id}}" method="POST">
         <label for="first_name" >first name</label>
         <input type="text" name="first_name" value={{first_name}}><br>
@@ -23,12 +23,11 @@
         <button type="submit">Update</button>
     </form>
 
-      <a class="back-to-profile" href="/profile/{{id}}">Profile</a> 
     {{/if}}
 
 
-    {{#if name}}
-        <p>User {{name}} {{secondname}} has been updated.</p>
+    {{#if updated}}
+        <p>User {{first_name}} {{surname}} has been updated.</p>
 
 
         {{else if notFound}}
@@ -36,7 +35,7 @@
     
 
             {{else if notUpdated}}
-                <p>Unable to update {{firstName}} {{surname}} with user number {{notUpdated}}.</p>
+                <p>Unable to update {{first_name}} {{surname}} with user number {{notUpdated}}.</p>
             
     {{/if}}
 
@@ -44,6 +43,6 @@
         <p>The email {{existingEmail}} already exists in the database.  Please check the list of users in case you are registered twice.</p>
     {{/if}}
 
-
+    {{>footer  userId=id firstname=first_name surname=surname}}
 </body>
 </html>

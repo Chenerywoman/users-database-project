@@ -1,0 +1,43 @@
+footer{
+    margin: 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    padding-inline-start: 0;
+    background-color: #8D99AE;
+    padding: 1em 1em 1em 1em;
+    margin:0;
+}
+
+footer ul li {
+    padding-left: 1em;
+}
+
+footer ul li a{
+    text-decoration: none;
+    background-color: #EF233C;
+    border-radius: 5%;
+    padding: 0.5em;
+}
+
+footer ul li a:link {
+    color: #2B2D42;
+}
+
+footer ul li a:visited{
+    color: #EDF2F4;
+}
+
+@media only screen and (max-width: 300px) {
+
+    footer ul li {
+        padding-left: 0.5em;
+    }
+
+}
