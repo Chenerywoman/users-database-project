@@ -56,6 +56,21 @@ p {
     overflow-wrap: break-word;
 }
 
+.new-profile{
+    text-decoration: none;
+    margin: 0.25em 1em;
+    background-color: #D90429;
+    border: 1px solid #D90429;
+    padding: 0.25em;
+    font-size: 1.25em;
+    border-radius: 15%;
+    color: #2B2D42;
+}
+
+.new-profile:visited{
+    color: #8D99AE
+}
+
 
 @media only screen and (max-width: 500px) {
 
