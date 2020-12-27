@@ -16,5 +16,13 @@
     {{#if alreadyDeleted}}
          <p>User {{userName}} with id {{id}} has already been deleted.</p>
     {{/if}}
+
+    {{#if existingBlogs}}
+
+        <p>Cannot delete {{userName}} with id {{id}} without deleting the user's blogs first.</p>
+
+        <a class="blogs-link"href="/allblogs/{{id}}">Go to Blogs</a>
+
+    {{/if}}
 </body>
 </html>
