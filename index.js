@@ -86,8 +86,6 @@ app.post("/register", (req, res) => {
                         });
 
                     } else {
-                        console.log("result in register")
-                        console.log(result)
                         res.render("register", {
                             id:result.insertId,
                             firstNameRegistered: first_name,
@@ -216,7 +214,6 @@ app.post("/delete/:id", (req, res) => {
 
                 db.query(sqlDeleteQuery, user, (error, results) => {
                     if (error) {
-                        console.log("in second if")
                         console.log(error)
                         res.render("error", {
                             message: `unable to delete user ${fullName} with id: ${id}.`
@@ -281,7 +278,6 @@ app.get("/newblog/:id", (req, res) => {
     const user = [id];
 
     db.query(sqlSelectQuery, user, (error, result) => {
-        console.log(user)
         if (error) {
             console.log(error);
             res.redirect("/error")
@@ -304,8 +300,6 @@ app.get("/newblog/:id", (req, res) => {
 
 app.post("/newblog/:id", (req, res) => {
     const id = req.params.id;
-    console.log('req.body')
-    console.log(req.body)
     const userName = req.body.userName;
 
     const title = req.body.title;
@@ -439,7 +433,7 @@ app.get("/blog/:id", (req, res) => {
                 } else {
                     const date = resultBlog[0].date.toString();
                     const shortDate = date.substring(0, date.indexOf(" 00:00:00"))
-                    console.log(resultUser[0])
+        
                     res.render("blog", {
                         title: resultBlog[0].title,
                         blog: resultBlog[0].blog,
@@ -532,8 +526,7 @@ app.get("/blogs", (req, res) => {
             if (error) {
                 console.log(error);
                 res.redirect("/error")
-            } else {
-                console.log(authorResults)
+            } else {           
                 res.render("blogs", {
                     searchTerm: author,
                     authors: authorResults
