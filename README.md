@@ -52,7 +52,7 @@ The second part of the project brief was to create:
 
 * an individual blog page
 
-## Issues encountered and solutions
+## Issues and solutions
 
 Some issues I had and the solutions I came up with were:
 * **Issue**: when I added the blogs table an error was thrown if I tried to delete any users who were blog authors. 
@@ -65,6 +65,8 @@ Some issues I had and the solutions I came up with were:
 * **Issue**: I initially used one hbs page to render EITHER all the blogs from the blogs table OR all the blogs of an individual user. I had to use lots of hbs if/else clauses which made it difficult to layout and style the page. 
 * **Solution**: I created a separate hbs page to render an individual user's blogs
 
+* **Issue**: the styling of the links and buttons in various pages for individual users (userblogs.hbs, update.hbs, profile.hbs, newblog.hbs) looked messy.
+* **Solution**: I created a footer to display for these pages, passing in the user id.
 
 ## Dependencies
 
