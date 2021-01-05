@@ -11,13 +11,13 @@
     <h1>Register a new user</h1>
     <form class="register" action="/register" method="POST">
         <label for="first_name" >first name</label>
-        <input type="text" name="first_name"><br>
+        <input required type="text" name="first_name"><br>
         <label for="surname">surname</label>
-        <input type="text" name="surname"><br>
+        <input required type="text" name="surname"><br>
         <label for="email">email</label>
-        <input id="register-email" type="email" name="email"><br>
+        <input required id="register-email" type="email" name="email"><br>
         <label for="password">password</label>
-        <input type="password" name="password">
+        <input required type="password" name="password">
         <br>
         <button type="submit">Register</button>
     </form>

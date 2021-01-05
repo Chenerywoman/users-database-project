@@ -19,11 +19,11 @@
         <form class="generate-blog" action="/newblog/{{id}}" method="POST">
             <div class="row">
                 <label for="title">title</label>
-                <input class="title" type="text" name="title"><br>
+                <input required class="title" type="text" name="title"><br>
             </div>
             <div class="row">
                 <label for="blog">blog</label>
-                <textarea class="blog" rows="10" cols="35" name="blog"></textarea><br>
+                <textarea required class="blog" rows="10" cols="35" name="blog"></textarea><br>
                 <input type="hidden" name="userName" value='{{userName}}'>
             </div>
                 <label for="submit"></label>

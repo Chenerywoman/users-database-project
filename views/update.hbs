@@ -13,13 +13,13 @@
    {{#if toUpdate}}
     <form class="update" action="/update/{{id}}" method="POST">
         <label for="first_name" >first name</label>
-        <input type="text" name="first_name" value={{first_name}}><br>
+        <input required type="text" name="first_name" value={{first_name}}><br>
         <label for="surname">surname</label>
-        <input type="text" name="surname" value={{surname}}><br>
+        <input required type="text" name="surname" value={{surname}}><br>
         <label for="email">email</label>
-        <input type="text" name="email" value={{email}}><br>
+        <input required type="text" name="email" value={{email}}><br>
         <label type="text" name="password">password</label>
-        <input type="password" name="password" value={{password}}>
+        <input required type="password" name="password" value={{password}}>
         <button type="submit">Update</button>
     </form>
 
