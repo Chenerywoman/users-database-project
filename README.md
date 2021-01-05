@@ -1,6 +1,6 @@
 # SQL Database project using Express and Handlebars
 
-This was a CodeNation project to practise accessing a SQL database using Node.js.  The backend used the Express web framework for Node.js.  The frontend used the Handlebars templating language.
+This was a CodeNation project to practise accessing a SQL database using Node.js.  The database was a mySql database, hosted using the MAMP local server environment.  The backend used the Express web framework for Node.js.  The The frontend used the Handlebars templating language.
 
 ## Project Brief
 
@@ -10,7 +10,7 @@ The project brief was split into two stages.
 
 The first part of the project brief was to create:
 
-* a database with a table of users
+* a database with a table of users using MAMP.
 
 * a website with a node.js backend that interacts with the database and displays:
 
