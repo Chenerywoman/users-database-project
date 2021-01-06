@@ -68,6 +68,9 @@ Some issues I had and the solutions I came up with were:
 * **Issue**: the styling of the links and buttons in various pages for individual users (userblogs.hbs, update.hbs, profile.hbs, newblog.hbs) looked messy.
 * **Solution**: I created a footer to display for these pages, passing in the user id.
 
+* **Issue**: when updating a user, I needed to deal with the requirement that there should be no duplicate emails in the database.
+* **Solution**: I added an AND operator to the if statement which checks for any duplicate emails. This enabled me to add an additional condition, which checks if the user id relating to the email is different to the current user id.  If it is different, the user is not updated.  If it is the same user, the email is updated.
+
 ## Dependencies
 
 The dependencies for the project are:
